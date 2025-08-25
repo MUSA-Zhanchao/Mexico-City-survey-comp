@@ -11,7 +11,7 @@ The original analysis (`scripts/2017.R`) counted raw survey responses using `n()
 ## Data Structure
 
 ### Available Weight Factor
-- **Column**: `FACTOR` 
+- **Column**: `FACTOR`
 - **Description**: Expansion factor for converting survey responses to population estimates
 - **Range**: 5.0 to 1,921.0
 - **Mean**: 105.2
@@ -32,7 +32,7 @@ The original analysis (`scripts/2017.R`) counted raw survey responses using `n()
 ### Files Created/Modified
 
 1. **scripts/2017.R** - Updated original script to include weighted analysis
-2. **scripts/2017_weighted.R** - Standalone weighted analysis script  
+2. **scripts/2017_weighted.R** - Standalone weighted analysis script
 3. **scripts/compare_weighted_2017.R** - Comparison between weighted and unweighted results
 4. **data/2017/mode_combination_weighted_2017.csv** - Weighted mode combination results
 5. **data/2017/mode_combination_comparison_2017.csv** - Side-by-side comparison
@@ -57,7 +57,7 @@ mode2_combined <- two_mode_combined %>%
 
 ### Impact of Weighting
 - **Unweighted total**: 73,481 trips
-- **Weighted total**: 7,783,591 trips  
+- **Weighted total**: 7,783,591 trips
 - **Average expansion factor**: 105.93
 
 ### Mode Distribution Comparison

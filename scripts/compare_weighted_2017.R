@@ -37,7 +37,7 @@ for(i in 1:5) {
   unweighted_n <- top_15$unweighted_trips[i]
   weighted_pct <- top_15$weighted_percent[i]
   unweighted_pct <- top_15$unweighted_percent[i]
-  
+
   cat(sprintf("%d. %s:\n", i, mode))
   cat(sprintf("   Weighted: %s trips (%.2f%%)\n", format(weighted_n, big.mark=","), weighted_pct))
   cat(sprintf("   Unweighted: %s trips (%.2f%%)\n", format(unweighted_n, big.mark=","), unweighted_pct))

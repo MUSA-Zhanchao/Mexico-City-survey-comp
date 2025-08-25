@@ -263,7 +263,7 @@ mode2_weighted <- two_mode_combined %>%
   group_by(P5_14_merged) %>%
   summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
-# Weighted three mode  
+# Weighted three mode
 mode3_weighted <- three_mode_combined %>%
   group_by(P5_14_merged) %>%
   summarise(weighted_n = sum(FACTOR), .groups = 'drop')

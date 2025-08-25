@@ -8,7 +8,7 @@ Mexico City Travel Survey Comparison (2007-2017)
 - multimodal connection analysis
 - Weighted analysis available using `NFACTOR`
 
-## 2017 Structure 
+## 2017 Structure
 **Data processing completed with weighted analysis**
 - 5.14 (each mode is each column, like from `sklearn`)
 - data directory available
