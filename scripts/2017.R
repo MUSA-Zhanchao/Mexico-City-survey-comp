@@ -8,7 +8,7 @@ trip_14 <- trip_2017 %>%
   filter(P5_3==1)
 
 trip14 <- trip_14 %>%
-  select(starts_with("P5_14"), FACTOR)
+  select(starts_with("P5_14"))
 
 trip_14[trip_14 == 2] <- NA
 
