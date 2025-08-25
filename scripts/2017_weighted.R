@@ -1,42 +1,49 @@
 library(foreign)
 library(tidyverse)
 
+# Load 2017 trip data with weighting factor
 trip_2017<- read.csv("data/2017/trip_2017.csv")
 
-# Select P5_14 columns for mode analysis, keep FACTOR for weighting
+# Select P5_14 columns (transportation modes) and keep FACTOR column for weighting
 trip_14 <- trip_2017 %>%
   select(starts_with("P5_14"), FACTOR)
 
+# Replace 2 values with NA (as in original script)
 trip_14[trip_14 == 2] <- NA
 
+# One mode trips - weighted analysis
 one_mode <- trip_14 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 1)
 
 n_total <- nrow(one_mode)
+weighted_total <- sum(one_mode$FACTOR)
 
+# Summary table for one mode - weighted
 summary_tbl <- one_mode %>%
-  summarise(across(starts_with("P5_14_"), ~ sum(!is.na(.)))) %>%
-  pivot_longer(everything(), names_to = "column", values_to = "n_valid") %>%
-  arrange(desc(n_valid))
+  summarise(across(starts_with("P5_14_"), ~ sum(FACTOR[!is.na(.)]))) %>%
+  pivot_longer(everything(), names_to = "column", values_to = "weighted_n") %>%
+  arrange(desc(weighted_n))
 
-
+# Two mode trips processing
 two_mode<- trip_14 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
 
-# get rid of walking
+# get rid of walking (set P5_14_14 to NA)
 two_mode<- two_mode %>%
   mutate(P5_14_14 = ifelse(is.na(P5_14_14), NA, NA))
+
+# Process trips that became single mode after removing walking
 two_one_combined_walking<- two_mode%>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 1)
 summary_tbl_one_mode_plus <- two_one_combined_walking %>%
-  summarise(across(starts_with("P5_14_"), ~ sum(!is.na(.)))) %>%
-  pivot_longer(everything(), names_to = "column", values_to = "n_valid") %>%
-  arrange(desc(n_valid))
+  summarise(across(starts_with("P5_14_"), ~ sum(FACTOR[!is.na(.)]))) %>%
+  pivot_longer(everything(), names_to = "column", values_to = "weighted_n") %>%
+  arrange(desc(weighted_n))
 summary_one<-rbind(summary_tbl, summary_tbl_one_mode_plus)%>%
   group_by(column) %>%
-  summarise(n_valid = sum(n_valid))
+  summarise(weighted_n = sum(weighted_n))
 
-# actual two mode processing
+# actual two mode processing - weighted
 two_mode<-two_mode%>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
 two_mode<- two_mode%>%
@@ -61,7 +68,6 @@ two_mode<- two_mode%>%
          P5_14_19 = ifelse(is.na(P5_14_19), NA, "Other"),
          P5_14_20 = ifelse(is.na(P5_14_20), NA, "Other"))
 
-
 # Build merged label per row: distinct, non-NA, joined with "_"
 two_mode_combined <- two_mode %>%
   rowwise() %>%
@@ -75,15 +81,12 @@ two_mode_combined <- two_mode %>%
   ) %>%
   ungroup()
 
+# Weighted summary for two mode
 mode2_combined<- two_mode_combined %>%
   group_by(P5_14_merged) %>%
-  summarise(n = n(), .groups = 'drop')
+  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
-sum(mode2_combined$n)
-
-
-
-
+# Three mode trips - weighted
 three_mode <- trip_14 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 3)
 
@@ -124,8 +127,9 @@ three_mode_combined <- three_mode %>%
 
 mode3_combined<- three_mode_combined %>%
   group_by(P5_14_merged) %>%
-  summarise(n = n(), .groups = 'drop')
+  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
+# Four mode trips - weighted
 four_mode <- trip_14 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 4)
 four_mode<-four_mode%>%
@@ -163,9 +167,9 @@ four_mode_combined <- four_mode %>%
   ungroup()
 mode4_combined<- four_mode_combined %>%
   group_by(P5_14_merged) %>%
-  summarise(n = n(), .groups = 'drop')
+  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
-
+# Five mode trips - weighted
 five_mode <- trip_14 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 5)
 five_mode<-five_mode%>%
@@ -203,8 +207,9 @@ five_mode_combined <- five_mode %>%
   ungroup()
 mode5_combined<- five_mode_combined %>%
   group_by(P5_14_merged) %>%
-  summarise(n = n(), .groups = 'drop')
+  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
+# Six mode trips - weighted
 six_mode <- trip_14 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 6)
 six_mode<-six_mode%>%
@@ -241,56 +246,17 @@ six_mode_combined <- six_mode %>%
   ungroup()
 mode6_combined<- six_mode_combined %>%
   group_by(P5_14_merged) %>%
-  summarise(n = n(), .groups = 'drop')
-
-#write.csv(two_mode, "data/2017/two_mode_2017.csv", row.names = FALSE)
-
-complete<-rbind(mode2_combined, mode3_combined, mode4_combined, mode5_combined, mode6_combined)
-complete<- complete %>%
-  group_by(P5_14_merged) %>%
-  summarise(n = sum(n), .groups = 'drop')
-write.csv(complete, "data/2017/mode_combinationw2mod_more_2017.csv", row.names = FALSE)
-sum(complete$n)
-
-# === WEIGHTED ANALYSIS ===
-# This section provides population-weighted estimates using the FACTOR column
-
-# Weighted two mode
-mode2_weighted <- two_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-# Weighted three mode  
-mode3_weighted <- three_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-# Weighted four mode
-mode4_weighted <- four_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-# Weighted five mode
-mode5_weighted <- five_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-# Weighted six mode
-mode6_weighted <- six_mode_combined %>%
-  group_by(P5_14_merged) %>%
   summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
 # Combine all weighted results
-complete_weighted <- rbind(mode2_weighted, mode3_weighted, mode4_weighted, mode5_weighted, mode6_weighted)
-complete_weighted <- complete_weighted %>%
+complete_weighted<-rbind(mode2_combined, mode3_combined, mode4_combined, mode5_combined, mode6_combined)
+complete_weighted<- complete_weighted %>%
   group_by(P5_14_merged) %>%
   summarise(weighted_n = sum(weighted_n), .groups = 'drop')
 
-# Save weighted results
+# Write weighted results
 write.csv(complete_weighted, "data/2017/mode_combination_weighted_2017.csv", row.names = FALSE)
 
-# Print summary
-cat("=== SUMMARY ===\n")
-cat("Unweighted total trips:", sum(complete$n), "\n")
-cat("Weighted total trips:", sum(complete_weighted$weighted_n), "\n")
-cat("Average expansion factor:", round(sum(complete_weighted$weighted_n) / sum(complete$n), 2), "\n")
+# Print comparison of totals
+cat("Total weighted trips:", sum(complete_weighted$weighted_n), "\n")
+cat("Original unweighted total from existing file:", sum(read.csv("data/2017/mode_combinationw2mod_more_2017.csv")$n), "\n")
