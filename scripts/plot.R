@@ -54,7 +54,7 @@ percent <- percent %>%
 
 # special accomodation
 percent<- percent %>%
-  filter(x != "Walk") 
+  filter(x != "Walk")
 
 percent<-percent%>%
   mutate(X2017= X2017/sum(X2017)*100)
