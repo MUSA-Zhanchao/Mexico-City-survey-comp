@@ -4,8 +4,11 @@ library(tidyverse)
 # Load 2017 trip data with weighting factor
 trip_2017<- read.csv("data/2017/trip_2017.csv")
 
-# Select P5_14 columns (transportation modes) and keep FACTOR column for weighting
 trip_14 <- trip_2017 %>%
+  filter(P5_3==1)
+
+# Select P5_14 columns (transportation modes) and keep FACTOR column for weighting
+trip_14 <- trip_14 %>%
   select(starts_with("P5_14"), FACTOR)
 
 # Replace 2 values with NA (as in original script)
