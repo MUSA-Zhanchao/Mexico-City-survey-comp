@@ -22,7 +22,7 @@ The 2017 analysis now includes proper population weighting using the `FACTOR` co
 
 - **Unweighted analysis**: Raw survey response counts (73,481 trips)
 - **Weighted analysis**: Population-representative estimates (7,783,591 trips)
-- **Average expansion factor**: 105.93
+- **Average expansion factor**: 105.93 (`FACTOR`
 
 ### Key Files:
 - `scripts/2017.R` - Main analysis script (includes both weighted and unweighted)
