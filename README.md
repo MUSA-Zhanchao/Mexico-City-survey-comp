@@ -1,5 +1,7 @@
 # Mexico City Household Travel Survey Comparison across Years
 
+Zhanchao Yang
+
 Mexico City Travel Survey Comparison (2007-2017)
 
 ## 2007 structure
@@ -12,7 +14,7 @@ Mexico City Travel Survey Comparison (2007-2017)
 **Data processing completed with weighted analysis**
 - 5.14 (each mode is each column, like from `sklearn`)
 - data directory available
-- reaggregate and updated the files directories
+- reaggregated and updated the file directories
 - **Weighted analysis implemented using `FACTOR` column**
 - Both weighted and unweighted results available for comparison
 
