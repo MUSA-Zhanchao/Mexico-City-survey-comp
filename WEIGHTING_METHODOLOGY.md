@@ -95,9 +95,41 @@ Rscript scripts/compare_weighted_2017.R
 - `mode_combination_weighted_2017.csv` - Population-weighted results
 - `mode_combination_comparison_2017.csv` - Side-by-side comparison
 
+## Implementation for 2007 Data
+
+Following the same methodology established for 2017 data, weighted processing has now been implemented for the 2007 Mexico City Travel Survey data.
+
+### 2007 Weight Factor
+- **Column**: `NFACTOR`
+- **Description**: Expansion factor for converting 2007 survey responses to population estimates
+- **Range**: 9.0 to 820.0
+- **Mean**: 94.5
+
+### Changes Made for 2007
+
+1. **Created scripts/2007_weighted.R** - Weighted version of the original 2007 analysis
+2. **Modified aggregation functions** from `count = n()` to `weighted_count = sum(NFACTOR)`
+3. **Updated combination processing** to preserve weighted sums through all trip combination steps
+4. **Added weighted output files** with clear naming convention
+
+### Files Created for 2007
+
+1. **scripts/2007_weighted.R** - Standalone weighted analysis script for 2007 data
+2. **scripts/compare_weighted_2007.R** - Comparison between weighted and unweighted 2007 results
+3. **data/2007/multimodal_trip_combined_weighted_2007.csv** - Weighted multimodal trip combinations
+4. **data/2007/single_mode_weighted_2007.csv** - Weighted single mode trip results
+5. **data/2007/mode_combination_comparison_2007.csv** - Side-by-side comparison of weighted vs unweighted
+
+### Key Results for 2007
+
+- **Unweighted total trips**: 232,317
+- **Weighted total trips**: ~21,934,435
+- **Average expansion factor**: 94.5
+- **Expansion consistency**: Individual trip combination expansion factors range from 91-122, showing consistent weighting across trip types
+
 ## Recommendations
 
 1. **Use weighted results** for population-level inferences and policy decisions
 2. **Use unweighted results** for survey methodology validation and sample size reporting
-3. **Apply consistent weighting** across all 2017 analyses for coherent results
-4. **Consider updating 2007 analysis** to use NFACTOR for consistency across years
+3. **Apply consistent weighting** across all analyses for coherent cross-year comparisons
+4. **Consider the expansion factors** when interpreting results - 2007 data has lower expansion factors (mean 94.5) compared to 2017 data (mean 105.2)
