@@ -7,13 +7,13 @@ unweighted_multimodal <- read.csv("data/2007/mutimodal_trip_combined_2007.csv")
 weighted_single <- read.csv("data/2007/single_mode_weighted_2007.csv")
 
 # Prepare comparison data for multimodal trips
-# Create a key for merging 
+# Create a key for merging
 create_key <- function(df) {
   df %>%
     mutate(
       trip_key = paste(
         ifelse(is.na(trip1), "", trip1),
-        ifelse(is.na(trip2), "", trip2), 
+        ifelse(is.na(trip2), "", trip2),
         ifelse(is.na(trip3), "", trip3),
         ifelse(is.na(trip4), "", trip4),
         ifelse(is.na(trip5), "", trip5),
@@ -25,11 +25,11 @@ create_key <- function(df) {
     mutate(trip_key = str_replace_all(trip_key, "_+$", ""))
 }
 
-weighted_with_key <- weighted_multimodal %>% 
+weighted_with_key <- weighted_multimodal %>%
   create_key() %>%
   select(trip_key, weighted_count = weighted_count)
 
-unweighted_with_key <- unweighted_multimodal %>% 
+unweighted_with_key <- unweighted_multimodal %>%
   create_key() %>%
   select(trip_key, unweighted_count = count)
 

@@ -402,11 +402,11 @@ combine_trip_tables <- function(..., max_trips = 6, unordered_within_row = FALSE
 combined_weighted <- combine_trip_tables(combo_2, combo_3, combo_4, combo_6, combo_5, max_trips = 6)
 
 # Calculate weighted totals
-weighted_total <- sum(combined_weighted$weighted_count) + 
-                  weighted_combined_2_1 + 
-                  weighted_Combined_3_1 + 
-                  weighted_combined_4_1 + 
-                  weighted_combined_5_1 + 
+weighted_total <- sum(combined_weighted$weighted_count) +
+                  weighted_combined_2_1 +
+                  weighted_Combined_3_1 +
+                  weighted_combined_4_1 +
+                  weighted_combined_5_1 +
                   sum(single_mode$weighted_count)
 
 # Save weighted results
