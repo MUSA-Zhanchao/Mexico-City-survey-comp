@@ -25,6 +25,15 @@ single_mode<-single_mode%>%
   summarise(
     weighted_count = sum(NFACTOR)
   )
+single_mode<-single_mode%>%
+  mutate(trip1=case_when(
+    trip1 == "a" ~ "A",
+    trip1 == "b" ~ "B",
+    trip1 == "c" ~ "C",
+    TRUE ~ trip1))
+single_mode<-single_mode%>%
+  group_by(trip1)%>%
+  summarise(weighted_count = sum(weighted_count))
 
 # Two mode trips - weighted analysis
 trip2_or_more<- trip_2007 %>%
@@ -48,14 +57,19 @@ combo_2<- trip2_summarised %>%
 # Combined constant adjustment - need to handle this proportionally
 # Original combined_2_1 = 10+69+438+17214+26+9+3 = 17769 (unweighted count)
 # We need to find the weighted equivalent by looking at trips that became single mode
-trip2_to_single <- trip2_or_more %>%
-  # Logic here is complex - for now, calculate the weighted sum for similar cases
-  filter(is.na(trip2)) # This won't match any, but shows the pattern
+trip2_to_single <- combo_2 %>%
+  filter(is.na(trip2))%>%
+  select(-trip2)
+single_mode_complete<-rbind(single_mode, trip2_to_single)
+single_mode_complete<-single_mode_complete%>%
+  group_by(trip1)%>%
+  summarise(weighted_count = sum(weighted_count))
+#write.csv(single_mode_complete, "data/2007/single_mode_weighted_complete_2007.csv", row.names = FALSE)
 
-# For simplicity, calculate the weighted equivalent proportionally
-# We'll calculate this from the data rather than using a fixed constant
-unweighted_combined_2_1 <- 17769
-weighted_combined_2_1 <- unweighted_combined_2_1 * mean(trip_2007$NFACTOR)
+
+
+####### ---- finished checked before here ------
+
 
 combo_2<-combo_2%>%
   filter(!is.na(trip2))
