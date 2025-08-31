@@ -68,9 +68,6 @@ single_mode_complete<-single_mode_complete%>%
 
 
 
-####### ---- finished checked before here ------
-
-
 combo_2<-combo_2%>%
   filter(!is.na(trip2))
 
@@ -120,10 +117,10 @@ combo <- trip3_summarised %>%
   separate(key, into = c("trip1", "trip2", "trip3"), sep = "_", fill = "right")
 
 # Weighted equivalent of Combined_3_1 = 5+1932 = 1937
-weighted_Combined_3_1 <- 1937 * mean(trip_2007$NFACTOR)
+#weighted_Combined_3_1 <- 1937 * mean(trip_2007$NFACTOR)
 
-combo<-combo%>%
-  filter(!is.na(trip2))
+#combo<-combo%>%
+#  filter(!is.na(trip2))
 
 combo_3<-combo%>%
   mutate(
@@ -170,7 +167,7 @@ trip4_summarised<-trip4_or_more%>%
   arrange(desc(weighted_count))
 
 # Weighted equivalent of combined_4_1 = 131
-weighted_combined_4_1 <- 131 * mean(trip_2007$NFACTOR)
+# weighted_combined_4_1 <- 131 * mean(trip_2007$NFACTOR)
 
 combo_4<- trip4_summarised %>%
   rowwise() %>%
@@ -180,8 +177,8 @@ combo_4<- trip4_summarised %>%
   summarise(weighted_count = sum(weighted_count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4"), sep = "_", fill = "right")
 
-combo_4<-combo_4%>%
-  filter(!is.na(trip2))
+#combo_4<-combo_4%>%
+#  filter(!is.na(trip2))
 
 combo_4<-combo_4%>%
   mutate(
@@ -243,10 +240,10 @@ combo_5<- trip5_summarised %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4", "trip5"), sep = "_", fill = "right")
 
 # Weighted equivalent of combined_5_1 = 8
-weighted_combined_5_1 <- 8 * mean(trip_2007$NFACTOR)
+#weighted_combined_5_1 <- 8 * mean(trip_2007$NFACTOR)
 
-combo_5<-combo_5%>%
-  filter(!is.na(trip2))
+#combo_5<-combo_5%>%
+#  filter(!is.na(trip2))
 
 combo_5<-combo_5%>%
   mutate(
@@ -314,8 +311,8 @@ combo_6<- trip6_summarised %>%
   summarise(weighted_count = sum(weighted_count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4", "trip5", "trip6"), sep = "_", fill = "right")
 
-combo_6<-combo_6%>%
-  filter(!is.na(trip2))
+#combo_6<-combo_6%>%
+#  filter(!is.na(trip2))
 
 combo_6<-combo_6%>%
   mutate(
@@ -415,14 +412,8 @@ combine_trip_tables <- function(..., max_trips = 6, unordered_within_row = FALSE
 # Combine all weighted results
 combined_weighted <- combine_trip_tables(combo_2, combo_3, combo_4, combo_6, combo_5, max_trips = 6)
 
-# Calculate weighted totals
-weighted_total <- sum(combined_weighted$weighted_count) +
-                  weighted_combined_2_1 +
-                  weighted_Combined_3_1 +
-                  weighted_combined_4_1 +
-                  weighted_combined_5_1 +
-                  sum(single_mode$weighted_count)
-
+combined_weighted <- combined_weighted %>%
+  select(-trip5,-trip6)
 # Save weighted results
 write.csv(combined_weighted, "data/2007/multimodal_trip_combined_weighted_2007.csv", row.names = FALSE)
 
@@ -434,4 +425,4 @@ cat("Unweighted total from original script:", 232317, "\n")
 cat("Expansion ratio:", round(weighted_total / 232317, 2), "\n")
 
 # Save single mode weighted results too
-write.csv(single_mode, "data/2007/single_mode_weighted_2007.csv", row.names = FALSE)
+#write.csv(single_mode, "data/2007/single_mode_weighted_2007.csv", row.names = FALSE)
