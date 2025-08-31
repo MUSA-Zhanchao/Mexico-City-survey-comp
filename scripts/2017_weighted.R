@@ -45,7 +45,36 @@ summary_tbl_one_mode_plus <- two_one_combined_walking %>%
 summary_one<-rbind(summary_tbl, summary_tbl_one_mode_plus)%>%
   group_by(column) %>%
   summarise(weighted_n = sum(weighted_n))
+summary_one<- summary_one %>%
+  mutate(mode = case_when(
+    column == "P5_14_01" ~ "Automobile",
+    column == "P5_14_02" ~ "Bus",
+    column == "P5_14_03" ~ "Taxi",
+    column == "P5_14_04" ~ "Taxi",
+    column == "P5_14_05" ~ "Metro",
+    column == "P5_14_06" ~ "Bus",
+    column == "P5_14_07" ~ "Bicycle",
+    column == "P5_14_08" ~ "Bus",
+    column == "P5_14_09" ~ "Moto",
+    column == "P5_14_10" ~ "Bus",
+    column == "P5_14_11" ~ "BRT",
+    column == "P5_14_12" ~ "Metro",
+    column == "P5_14_13" ~ "Metro",
+    column == "P5_14_14" ~ "Walk",
+    column == "P5_14_15" ~ "Metro",
+    column == "P5_14_16" ~ "Taxi",
+    column == "P5_14_17" ~ "Taxi",
+    column == "P5_14_18" ~ "Bus",
+    column == "P5_14_19" ~ "Other",
+    column == "P5_14_20" ~ "Other",
+    TRUE ~ NA_character_
+  ))
 
+summary_one <- summary_one %>%
+  group_by(mode) %>%
+  summarise(weighted_n = sum(weighted_n))%>%
+  mutate(weighted_percent = round(weighted_n*100 / sum(weighted_n), 2))
+# write.csv(summary_one, "data/2017/single_mode_weighted_2017.csv", row.names = FALSE)
 # actual two mode processing - weighted
 two_mode<-two_mode%>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
@@ -258,7 +287,7 @@ complete_weighted<- complete_weighted %>%
   summarise(weighted_n = sum(weighted_n), .groups = 'drop')
 
 # Write weighted results
-write.csv(complete_weighted, "data/2017/mode_combination_weighted_2017.csv", row.names = FALSE)
+#write.csv(complete_weighted, "data/2017/mode_combination_weighted_2017.csv", row.names = FALSE)
 
 # Print comparison of totals
 cat("Total weighted trips:", sum(complete_weighted$weighted_n), "\n")
