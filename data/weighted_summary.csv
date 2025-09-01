@@ -1,0 +1,21 @@
+x,X2007,single_label,count,X2007.1,multi_label,count2,X2017,single_la_17,count_1,X2017.1,multi_la_17,count_2
+Walk,,NA,0,,,NA,29.73%,caminar en la calle (14),11150966,,,NA
+Bike,1.98%,Bicicleta (B),433981,,,NA,1.87%,Bicicleta (07),700372,,,NA
+Car,28.60%,automovil (9),6279577,,,NA,17.23%,automovil (01),6464364,,,NA
+Taxi,6.07%,Taxi (8),1332814,,,NA,4.07%,Taxi (App) (03),1525502,,,NA
+Motorcycle,0.42%,Moto (A),91962,,,NA,0.98%,Moto (09),366741,,,NA
+Metro & Light rail,5.94%,"Metro, light rail (only)",1303539,19.66%,Metro+ light rail (metro),353671,2.42%,Metro(05),907550,15.96%,BRT+metro,213171
+Metro & Light rail,,,NA,,Metro+BRT,31793,,,NA,,Bus+Metro,4987834
+Metro & Light rail,,,NA,,"Metro + Others (taxi, dirve, motorcycle)",156108,,,NA,,Metro+ other mode of metro,28870
+Metro & Light rail,,,NA,,Metro +Bus,3549086,,,NA,,Metro+other,240590
+Metro & Light rail,,,NA,,Metro +BRT +bus,47236,,,NA,,BRT +bus +metro,247637
+Metro & Light rail,,,NA,,Metro+BRT+other,3211,,,NA,,BRT + Metro+other,44399
+Metro & Light rail,,,NA,,metro+bus+other,173027,,,NA,,Bus+metro+other,206744
+Metro & Light rail,,,NA,,Metro+BRT+ bus+other,1720,,,NA,,BRT+bus+metro+other,17287
+BRT,0.19%,Metrobus (only),42633,0.49%,BRT+Bus,97345,0.88%,"metrobus,Mexibus(11)",331807,1.79%,BRT+Bus,592314
+BRT,,,NA,,BRT +others,6065,,,NA,,BRT+other,52581
+BRT,,,NA,,BRT+ bus+other,3104,,,NA,,BRT +bus +other,27667
+Non BRT bus,32.56%,Trolebus (4),7149173,3.13%,bus+ other bus,460506,21.93%,Trolebus (Trolley) (10),8225925,2.93%,Bus+other Bus (two mode of bus connect),625678
+Non BRT bus,,,NA,,Bus+ Other mode,227066,,,NA,,Bus+ other,472569
+Non BRT bus,,,NA,,,NA,,,NA,,,NA
+Other,0.92%,Otro  (C ),200890,0.04%,Other mode combined (no public transit),9650,0.15%,Otro (20),55077,0.07%,Other mode combined (no public transit involved),26250
