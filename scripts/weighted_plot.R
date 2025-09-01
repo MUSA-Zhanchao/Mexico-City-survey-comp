@@ -62,4 +62,3 @@ ggplot(trip2017, aes(x = reorder(x, percent), y = percent, fill = x)) +
     plot.title = element_text(hjust = 0.5),
     plot.margin = margin(5.5, 20, 5.5, 5.5)     # a bit more right margin
   )
-
