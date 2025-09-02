@@ -3,7 +3,7 @@ Zhanchao Yang
 
 ## Overview
 
-This analysis provides critical insight into how travel behaviors in Mexico City evolved between 2007 and 2017, particularly focusing on mode choice and the role of multimodal connectivity. Understanding these patterns is essential for transportation planning, as it highlights where high-capacity transit has gained or lost traction, how the private car’s role is shifting, and how multimodal integration has expanded. These findings serve as a foundation for policy implication on improving transit connectivity, investing in high-capacity corridors, and reducing dependence on private automobiles.
+This analysis provides critical insight into how travel behaviors in Mexico City evolved between 2007 and 2017, particularly focusing on mode choice and the role of multimodal connectivity. Understanding these patterns is essential for transportation planning, as it highlights where high-capacity transit has gained or lost traction, how the private car’s role is shifting, and how multimodal integration has expanded. These findings serve as a foundation for policy implication on improving transit connectivity, investing in high-capacity corridors, and reducing dependenc e on private automobiles.
 
 ## Methodolgy
 
