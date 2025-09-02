@@ -31,6 +31,7 @@ The 2017 analysis now includes proper population weighting using the `FACTOR` co
 - `scripts/2017_weighted.R` - Standalone weighted analysis
 - `scripts/compare_weighted_2017.R` - Comparison between methods
 - `WEIGHTING_METHODOLOGY.md` - Detailed documentation
+- `doc/write-up.md` - Final report
 
 ### Output Files:
 - `mode_combinationw2mod_more_2017.csv` - Unweighted results
