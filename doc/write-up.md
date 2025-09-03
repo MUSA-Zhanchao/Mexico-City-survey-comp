@@ -47,11 +47,19 @@ Single-mode trips remained dominant in both 2007 and 2017. Excluding walking, th
 
 By mode, non-BRT bus was the most commonly used in both years, rising from 42.47% to 44.28%. Automobile (driver) declined from 37.3% to 34.8%, while taxi increased from 8% to 8.21%. Metro/light rail decreased from 7.74% to 4.89%, whereas BRT grew from 0.25% to 1.79%. Other modes (e.g., bike, motorcycle) remained at roughly 5% across both years.
 
+![](../weighted_plot/Rplot.png)
+![](../weighted_plot/Rplot01.png)
+
 ## Multimodal trips trends (2007 vs 2017)
 
 High-capacity transit (BRT and Metro) plays a more prominent role in multimodal trips than in single-mode travel. In single-mode trips, high-capacity modes account for 7.88% in 2007 and 5.62% in 2017. By contrast, multimodal trips that include Metro represent 19.66% of all trips in 2007 and 22.71% in 2017. Bus is the primary feeder to high-capacity transit: among Metro-involved multimodal trips, 82.23% (2007) and 83.32% (2017) are bus + Metro combinations.
+![](../weighted_plot/Rplot07.png)
+![](../weighted_plot/Rplot06.png)
 
 Overall, multimodality increased from 2007 to 2017. Bus-only trips decreased from 34.65% to 33.57%, and high-capacity-only (Metro/BRT) trips fell from 7.88% to 5.62%, while bus + high-capacity trips rose from 17.63% to 23.06%.
+
+![](../weighted_plot/Bus.png)
+![](../weighted_plot/bus2017.png)
 
 ## Key takeaways and insights
 
