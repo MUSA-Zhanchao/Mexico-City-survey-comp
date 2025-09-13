@@ -2,9 +2,26 @@ library(foreign)
 library(tidyverse)
 
 #trip <- read.dbf("data/2007/tr_viajes.dbf", as.is = TRUE)
+vivida<- read.dbf("data/2007/TVIVIENDA.DBF", as.is = TRUE)
+#write.csv(vivida, "data/2007/vivida_2007.csv", row.names = FALSE)
+vivi<- vivida%>%
+  select(ID_VIV, ENT)
+hogar<- read.dbf("data/2007/tr_hogares.dbf", as.is = TRUE)
+hogar_07<- hogar%>%
+  select(IDTR_HOGAR,IDTR_VIVIE)
+vivi_hogar<- left_join(vivi, hogar_07, by = c("ID_VIV"= "IDTR_VIVIE"))
+residents<- read.dbf("data/2007/tr_residentes.dbf", as.is = TRUE)
+resident_07<- residents%>%
+  select(IDTR_RESID, IDTR_HOGAR)
+vivi_hogar_resident<- left_join(vivi_hogar, resident_07, by = c("IDTR_HOGAR"= "IDTR_HOGAR"))
 
 trip_2007<- read.csv("data/2007/trip_2007.csv")
+trip_2007<- left_join(trip_2007, vivi_hogar_resident, by = c( "IDTR_RESID"= "IDTR_RESID"))
 
+trip_2007<- trip_2007%>%
+  select(SORDENTRAN, ENT)
+
+# write.csv(trip_2007, "data/2007/trip_2007_simple_complete.csv", row.names = FALSE)
 library(tidyr)
 
 library(purrr)

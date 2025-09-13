@@ -2,6 +2,7 @@ library(foreign)
 library(tidyverse)
 
 trip_2017<- read.csv("data/2017/trip_2017.csv")
+vividate_2017<- read.dbf("data/2017/tr_viviendas.dbf", as.is = TRUE)
 
 ## Filter out the trips that are on Weekends to align with 2007 data
 trip_14 <- trip_2017 %>%
