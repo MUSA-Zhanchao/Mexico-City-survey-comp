@@ -18,6 +18,7 @@ Mexico City Travel Survey Comparison (2007-2017)
 - reaggregated and updated the file directories
 - **Weighted analysis implemented using `FACTOR` column**
 - Both weighted and unweighted results available for comparison
+- Further examine the datasets by filtering out Mexico City trip
 
 ## Weighting Implementation
 
@@ -25,7 +26,7 @@ The 2017 analysis now includes proper population weighting using the `FACTOR` co
 
 - **Unweighted analysis**: Raw survey response counts (73,481 trips)
 - **Weighted analysis**: Population-representative estimates (7,783,591 trips)
-- **Average expansion factor**: 105.93 (`FACTOR`
+- **Average expansion factor**: 105.93 (`FACTOR`)
 
 ### Key Files:
 - `scripts/2017.R` - Main analysis script (includes both weighted and unweighted)
