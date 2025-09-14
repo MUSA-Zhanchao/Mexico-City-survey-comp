@@ -1,0 +1,20 @@
+"P5_14_merged","n","type","share"
+"Walking",4467826,"Single Mode",36.9223295988375
+"Other",4301133,"Single Mode",35.5447706053093
+"Bus_Metro",1522076,"Multi Mode",12.5785094913007
+"Bus",860579,"Single Mode",7.11186637166218
+"BRT_Bus",224642,"Multi Mode",1.85645232507758
+"Bus",188766,"Multi Mode",1.55997133036384
+"Bus_Other",106203,"Multi Mode",0.877666715397004
+"Metro",90365,"Single Mode",0.746780719347385
+"Metro_Other",79465,"Multi Mode",0.656702593514524
+"BRT_Metro",61350,"Multi Mode",0.506999359618902
+"Bus_Metro_Other",52469,"Multi Mode",0.433606347185724
+"BRT_Bus_Metro",50385,"Multi Mode",0.41638407065034
+"BRT",43763,"Single Mode",0.361659543194817
+"Metro",13983,"Multi Mode",0.11555618656155
+"BRT_Other",13881,"Multi Mode",0.114713253640912
+"BRT_Bus_Other",7821,"Multi Mode",0.0646331212971382
+"Other",7660,"Multi Mode",0.0633026095302492
+"BRT_Metro_Other",5827,"Multi Mode",0.0481546091034937
+"BRT_Bus_Metro_Other",2413,"Multi Mode",0.0199411484068526
