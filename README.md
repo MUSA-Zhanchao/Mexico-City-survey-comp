@@ -9,6 +9,7 @@ Mexico City Travel Survey Comparison (2007-2017)
 - Single-mode classification
 - multimodal connection analysis
 - Weighted analysis available using `NFACTOR`
+- Further examine the datasets by filtering out Mexico City trip
 
 ## 2017 Structure
 **Data processing completed with weighted analysis**
