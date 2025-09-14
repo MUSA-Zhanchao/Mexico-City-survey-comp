@@ -391,5 +391,3 @@ mode_share_weighted_mex <- all_modes_weighted_mex %>%
 # Save mode share results
 #write.csv(mode_share_mex, "data/2017/mode_share_mexico_city_2017.csv", row.names = FALSE)
 #write.csv(mode_share_weighted_mex, "data/2017/mode_share_weighted_mexico_city_2017.csv", row.names = FALSE)
-
-
