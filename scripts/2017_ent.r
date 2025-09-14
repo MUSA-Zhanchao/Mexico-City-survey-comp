@@ -20,4 +20,4 @@ mexico_city_trips_2017 <- complete_trip_2017 %>%
   filter(P5_3==1)%>%
   select(starts_with("P5_14"), FACTOR)
 
-mexico_city_trips_2017[mexico_city_trips_2017 == 2] <- NA  
+mexico_city_trips_2017[mexico_city_trips_2017 == 2] <- NA
