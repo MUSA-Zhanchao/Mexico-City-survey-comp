@@ -64,8 +64,15 @@ combo_2_non_mex<- trip2_summarised_non_mex %>%
   group_by(key) %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2"), sep = "_", fill = "right")
+combined_2_1_non_mex<-combo_2_non_mex %>%
+  filter(is.na(trip2)) %>%
+  group_by(trip1) %>%
+  summarise(count = sum(count))
 
-combined_2_1_non_mex<-0  # This should be calculated based on non-Mexico City data
+combined_2_1_non_mex_plus<-rbind(combined_2_1_non_mex, single_mode_non_mex_c)
+single_mode_non_mex_c<-combined_2_1_non_mex_plus%>%
+  group_by(trip1)%>%
+  summarise(count = sum(count))
 
 combo_2_non_mex<-combo_2_non_mex%>%
   filter(!is.na(trip2))
@@ -96,7 +103,6 @@ combo_2_non_mex<-combo_2_non_mex%>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2"), sep = "_", fill = "right")
 
-sum(combo_2_non_mex$count)+combined_2_1_non_mex
 
 # 3 mode trips
 trip3_or_more_non_mex<- non_major_mex %>%
@@ -109,7 +115,6 @@ trip3_summarised_non_mex<-trip3_or_more_non_mex%>%
   )%>%
   arrange(desc(count))
 
-sum(trip3_summarised_non_mex$count)
 
 combo_3_non_mex <- trip3_summarised_non_mex %>%
   rowwise() %>%
@@ -119,12 +124,7 @@ combo_3_non_mex <- trip3_summarised_non_mex %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3"), sep = "_", fill = "right")
 
-Combined_3_1_non_mex<-0  # This should be calculated based on non-Mexico City data
 
-combo_3_non_mex<-combo_3_non_mex%>%
-  filter(!is.na(trip2))
-
-sum(combo_3_non_mex$count)+Combined_3_1_non_mex
 
 combo_3_non_mex<-combo_3_non_mex%>%
   mutate(
@@ -159,7 +159,6 @@ combo_3_non_mex<-combo_3_non_mex%>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3"), sep = "_", fill = "right")
 
-sum(combo_3_non_mex$count)+Combined_3_1_non_mex
 
 # 4 mode trips
 trip4_or_more_non_mex<- non_major_mex %>%
@@ -172,8 +171,6 @@ trip4_summarised_non_mex<-trip4_or_more_non_mex%>%
   )%>%
   arrange(desc(count))
 
-combined_4_1_non_mex<-0  # This should be calculated based on non-Mexico City data
-
 combo_4_non_mex<- trip4_summarised_non_mex %>%
   rowwise() %>%
   mutate(key = dedup_key(c(trip1, trip2, trip3, trip4))) %>%
@@ -182,8 +179,6 @@ combo_4_non_mex<- trip4_summarised_non_mex %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4"), sep = "_", fill = "right")
 
-combo_4_non_mex<-combo_4_non_mex%>%
-  filter(!is.na(trip2))
 
 combo_4_non_mex<-combo_4_non_mex%>%
   mutate(
@@ -244,10 +239,6 @@ combo_5_non_mex<- trip5_summarised_non_mex %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4", "trip5"), sep = "_", fill = "right")
 
-combined_5_1_non_mex<-0  # This should be calculated based on non-Mexico City data
-
-combo_5_non_mex<-combo_5_non_mex%>%
-  filter(!is.na(trip2))
 
 combo_5_non_mex<-combo_5_non_mex%>%
   mutate(
@@ -314,9 +305,6 @@ combo_6_non_mex<- trip6_summarised_non_mex %>%
   group_by(key) %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4", "trip5", "trip6"), sep = "_", fill = "right")
-
-combo_6_non_mex<-combo_6_non_mex%>%
-  filter(!is.na(trip2))
 
 combo_6_non_mex<-combo_6_non_mex%>%
   mutate(
@@ -412,7 +400,7 @@ combine_trip_tables <- function(..., max_trips = 6, unordered_within_row = FALSE
 
 combined_non_mex <- combine_trip_tables(combo_2_non_mex, combo_3_non_mex, combo_4_non_mex, combo_6_non_mex, combo_5_non_mex, max_trips = 6)
 
-sum(combined_non_mex$count)+combined_2_1_non_mex+Combined_3_1_non_mex+combined_4_1_non_mex+combined_5_1_non_mex+sum(single_mode_non_mex_c$count)
+sum(combined_non_mex$count)+sum(single_mode_non_mex_c$count)
 
-write.csv(combined_non_mex, "data/2007/multimodal_trip_combined_non_mex_2007.csv", row.names = FALSE)
-write.csv(single_mode_non_mex_c, "data/2007/single_mode_non_mex_2007.csv", row.names = FALSE)
+#write.csv(combined_non_mex, "data/2007/multimodal_trip_combined_non_mex_2007.csv", row.names = FALSE)
+#write.csv(single_mode_non_mex_c, "data/2007/single_mode_non_mex_2007.csv", row.names = FALSE)

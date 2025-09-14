@@ -66,7 +66,18 @@ combo_2_mex<- trip2_summarised_mex %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2"), sep = "_", fill = "right")
 
-combined_2_1_mex<-0  # This should be calculated based on Mexico City data
+combo_2_1_mex<-combo_2_mex%>%
+  filter(is.na(trip2))%>%
+  group_by(trip1)%>%
+  summarise(
+    count = sum(count)
+  )
+single_mode_mex_plus<-rbind(single_mode_mex_c, combo_2_1_mex)
+single_mode_mex_c<-single_mode_mex_plus%>%
+  group_by(trip1)%>%
+  summarise(
+    count = sum(count)
+  )
 
 combo_2_mex<-combo_2_mex%>%
   filter(!is.na(trip2))
@@ -96,7 +107,6 @@ combo_2_mex<-combo_2_mex%>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2"), sep = "_", fill = "right")
 
-sum(combo_2_mex$count)+combined_2_1_mex
 
 trip3_or_more_mex<- major_mex %>%
   filter(!is.na(trip3) & is.na(trip4))
@@ -118,12 +128,7 @@ combo_3_mex <- trip3_summarised_mex %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3"), sep = "_", fill = "right")
 
-Combined_3_1_mex<-0  # This should be calculated based on Mexico City data
 
-combo_3_mex<-combo_3_mex%>%
-  filter(!is.na(trip2))
-
-sum(combo_3_mex$count)+Combined_3_1_mex
 combo_3_mex<-combo_3_mex%>%
   mutate(
     trip1 = case_when(
@@ -156,7 +161,7 @@ combo_3_mex<-combo_3_mex%>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3"), sep = "_", fill = "right")
 
-sum(combo_3_mex$count)+Combined_3_1_mex
+
 
 trip4_or_more_mex<- major_mex %>%
   filter(!is.na(trip4)&is.na(trip5))
@@ -168,7 +173,6 @@ trip4_summarised_mex<-trip4_or_more_mex%>%
   )%>%
   arrange(desc(count))
 
-combined_4_1_mex<-0  # This should be calculated based on Mexico City data
 combo_4_mex<- trip4_summarised_mex %>%
   rowwise() %>%
   mutate(key = dedup_key(c(trip1, trip2, trip3, trip4))) %>%
@@ -177,8 +181,6 @@ combo_4_mex<- trip4_summarised_mex %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4"), sep = "_", fill = "right")
 
-combo_4_mex<-combo_4_mex%>%
-  filter(!is.na(trip2))
 
 combo_4_mex<-combo_4_mex%>%
   mutate(
@@ -235,9 +237,8 @@ combo_5_mex<- trip5_summarised_mex %>%
   group_by(key) %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4", "trip5"), sep = "_", fill = "right")
-combined_5_1_mex<-0  # This should be calculated based on Mexico City data
-combo_5_mex<-combo_5_mex%>%
-  filter(!is.na(trip2))
+
+
 combo_5_mex<-combo_5_mex%>%
   mutate(
     trip1 = case_when(
@@ -300,8 +301,7 @@ combo_6_mex<- trip6_summarised_mex %>%
   group_by(key) %>%
   summarise(count = sum(count), .groups = "drop") %>%
   separate(key, into = c("trip1", "trip2", "trip3", "trip4", "trip5", "trip6"), sep = "_", fill = "right")
-combo_6_mex<-combo_6_mex%>%
-  filter(!is.na(trip2))
+
 combo_6_mex<-combo_6_mex%>%
   mutate(
     trip1 = case_when(
@@ -395,6 +395,7 @@ combine_trip_tables <- function(..., max_trips = 6, unordered_within_row = FALSE
 
 combined_mex <- combine_trip_tables(combo_2_mex, combo_3_mex, combo_4_mex, combo_6_mex, combo_5_mex, max_trips = 6)
 
-sum(combined_mex$count)+combined_2_1_mex+Combined_3_1_mex+combined_4_1_mex+combined_5_1_mex+sum(single_mode_mex_c$count)
+sum(combined_mex$count)+ sum(single_mode_mex_c$count)
 
 #write.csv(combined_mex, "data/2007/mutimodal_trip_combined_mex_2007.csv", row.names = FALSE)
+#write.csv(single_mode_mex_c, "data/2007/single_mode_mex_2007.csv", row.names = FALSE)
