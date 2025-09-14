@@ -2,3 +2,4 @@ data/2017/trip_2017.csv filter=lfs diff=lfs merge=lfs -text
 data/2007/tr_residentes.dbf filter=lfs diff=lfs merge=lfs -text
 data/2007/tr_hogares.dbf filter=lfs diff=lfs merge=lfs -text
 data/2017/TSDEM.DBF filter=lfs diff=lfs merge=lfs -text
+data/2017/complete_trip_2017_withENT.csv filter=lfs diff=lfs merge=lfs -text
