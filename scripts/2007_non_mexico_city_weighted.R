@@ -51,7 +51,7 @@ single_mode_non_mex_weighted<-non_major_mex_single%>%
 single_mode_non_mex_weighted<-single_mode_non_mex_weighted%>%
   mutate(trip1=case_when(
     trip1 == "a" ~ "A",
-    trip1 == "b" ~ "B", 
+    trip1 == "b" ~ "B",
     trip1 == "c" ~ "C",
     TRUE ~ trip1))
 
