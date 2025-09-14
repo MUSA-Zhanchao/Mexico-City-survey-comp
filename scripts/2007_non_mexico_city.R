@@ -67,7 +67,7 @@ combo_2_non_mex<- trip2_summarised_non_mex %>%
 combined_2_1_non_mex<-combo_2_non_mex %>%
   filter(is.na(trip2)) %>%
   group_by(trip1) %>%
-  summarise(count = sum(count)) 
+  summarise(count = sum(count))
 
 combined_2_1_non_mex_plus<-rbind(combined_2_1_non_mex, single_mode_non_mex_c)
 single_mode_non_mex_c<-combined_2_1_non_mex_plus%>%
