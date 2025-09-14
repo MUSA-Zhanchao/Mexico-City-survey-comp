@@ -272,8 +272,13 @@ complete_mex <- complete_mex %>%
   summarise(n = sum(n), .groups = 'drop')
 
 # Save Mexico City multimodal results
-write.csv(complete_mex, "data/2017/mode_combination_mexico_city_2017.csv", row.names = FALSE)
+# write.csv(complete_mex, "data/2017/mode_combination_mexico_city_2017.csv", row.names = FALSE)
 
+sum(complete_mex$n)+sum(summary_one_mex$n_valid)
+
+
+
+#########
 # === WEIGHTED ANALYSIS FOR MEXICO CITY ===
 # Weighted two mode
 mode2_weighted_mex <- two_mode_combined_mex %>%
@@ -307,7 +312,7 @@ complete_weighted_mex <- complete_weighted_mex %>%
   summarise(weighted_n = sum(weighted_n), .groups = 'drop')
 
 # Save weighted results for Mexico City
-write.csv(complete_weighted_mex, "data/2017/mode_combination_weighted_mexico_city_2017.csv", row.names = FALSE)
+#write.csv(complete_weighted_mex, "data/2017/mode_combination_weighted_mexico_city_2017.csv", row.names = FALSE)
 
 # === SINGLE MODE ANALYSIS FOR MEXICO CITY ===
 # Process single mode trips with mode classification
@@ -384,21 +389,5 @@ mode_share_weighted_mex <- all_modes_weighted_mex %>%
   arrange(desc(n))
 
 # Save mode share results
-write.csv(mode_share_mex, "data/2017/mode_share_mexico_city_2017.csv", row.names = FALSE)
-write.csv(mode_share_weighted_mex, "data/2017/mode_share_weighted_mexico_city_2017.csv", row.names = FALSE)
-
-# === SUMMARY STATISTICS ===
-cat("=== MEXICO CITY TRIPS SUMMARY ===\n")
-cat("Unweighted total trips:", total_trips_mex, "\n")
-cat("Weighted total trips:", total_weighted_trips_mex, "\n")
-cat("Average expansion factor:", round(total_weighted_trips_mex / total_trips_mex, 2), "\n")
-cat("\n=== SINGLE MODE TRIPS ===\n")
-cat("Unweighted single mode trips:", sum(single_mode_summary_mex$n), "\n")
-cat("Weighted single mode trips:", sum(single_mode_weighted_mex$weighted_n), "\n")
-cat("\n=== MULTI MODE TRIPS ===\n")
-cat("Unweighted multi mode trips:", sum(complete_mex$n), "\n")
-cat("Weighted multi mode trips:", sum(complete_weighted_mex$weighted_n), "\n")
-
-# Print top mode combinations
-cat("\n=== TOP MODE COMBINATIONS (Weighted) ===\n")
-print(head(mode_share_weighted_mex, 10))
+#write.csv(mode_share_mex, "data/2017/mode_share_mexico_city_2017.csv", row.names = FALSE)
+#write.csv(mode_share_weighted_mex, "data/2017/mode_share_weighted_mexico_city_2017.csv", row.names = FALSE)
