@@ -110,7 +110,7 @@ trip3_summarised_mex<-trip3_or_more_mex%>%
 
 sum(trip3_summarised_mex$count)
 
-combo_mex <- trip3_summarised_mex %>%
+combo_3_mex <- trip3_summarised_mex %>%
   rowwise() %>%
   mutate(key = dedup_key(c(trip1, trip2, trip3))) %>%
   ungroup() %>%
@@ -120,11 +120,11 @@ combo_mex <- trip3_summarised_mex %>%
 
 Combined_3_1_mex<-0  # This should be calculated based on Mexico City data
 
-combo_mex<-combo_mex%>%
+combo_3_mex<-combo_3_mex%>%
   filter(!is.na(trip2))
 
-sum(combo_mex$count)+Combined_3_1_mex
-combo_3_mex<-combo_mex%>%
+sum(combo_3_mex$count)+Combined_3_1_mex
+combo_3_mex<-combo_3_mex%>%
   mutate(
     trip1 = case_when(
       trip1 %in% c("1", "2", "6") ~ "Metro",
