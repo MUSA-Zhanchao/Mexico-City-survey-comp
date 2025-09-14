@@ -21,6 +21,11 @@ trip_2007<- left_join(trip_2007, vivi_hogar_resident, by = c( "IDTR_RESID"= "IDT
 trip_2007<- trip_2007%>%
   select(SORDENTRAN, ENT)
 
+major_mex<-trip_2007%>%
+  filter(ENT=="09")
+not_major_mex<-trip_2007%>%
+  filter(ENT=="09")
+
 # write.csv(trip_2007, "data/2007/trip_2007_simple_complete.csv", row.names = FALSE)
 library(tidyr)
 
