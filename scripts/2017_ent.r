@@ -38,7 +38,7 @@ summary_tbl_mex <- one_mode_mex %>%
 two_mode_mex <- mexico_city_trips_2017 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
 
-# Get rid of walking 
+# Get rid of walking
 two_mode_mex <- two_mode_mex %>%
   mutate(P5_14_14 = ifelse(is.na(P5_14_14), NA, NA))
 
