@@ -394,3 +394,5 @@ cat("=== SUMMARY ===\n")
 cat("Unweighted total trips:", sum(complete_outside$n), "\n")
 cat("Weighted total trips:", sum(complete_weighted_outside$weighted_n), "\n")
 cat("Average expansion factor:", round(sum(complete_weighted_outside$weighted_n) / sum(complete_outside$n), 2), "\n")
+
+# End of script
