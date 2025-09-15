@@ -53,7 +53,7 @@ summary_tbl_one_mode_plus_mex <- two_one_combined_walking_mex %>%
 summary_one_mex <- rbind(summary_tbl_mex, summary_tbl_one_mode_plus_mex) %>%
   group_by(column) %>%
   summarise(n_valid = sum(n_valid))
-
+#sum(summary_one_mex$n_valid)
 # Actual two mode processing
 two_mode_mex <- two_mode_mex %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
@@ -360,8 +360,8 @@ single_mode_weighted_mex <- single_mode_combined_mex %>%
   summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
 # Save single mode results
-write.csv(single_mode_summary_mex, "data/2017/single_mode_mexico_city_2017.csv", row.names = FALSE)
-write.csv(single_mode_weighted_mex, "data/2017/single_mode_weighted_mexico_city_2017.csv", row.names = FALSE)
+#write.csv(single_mode_summary_mex, "data/2017/single_mode_mexico_city_2017.csv", row.names = FALSE)
+#write.csv(single_mode_weighted_mex, "data/2017/single_mode_weighted_mexico_city_2017.csv", row.names = FALSE)
 
 # === MODE SHARE CALCULATION ===
 # Calculate mode shares for Mexico City
