@@ -15,7 +15,7 @@ The script will generate the following CSV files in `data/2017/`:
 1. `mode_combination_outside_mexico_city_2017.csv` - Unweighted multimodal trip combinations
 2. `mode_combination_weighted_outside_mexico_city_2017.csv` - Weighted multimodal trip combinations
 
-### Single Mode Analysis  
+### Single Mode Analysis
 3. `single_mode_outside_mexico_city_2017.csv` - Unweighted single mode trips
 4. `single_mode_weighted_outside_mexico_city_2017.csv` - Weighted single mode trips
 
