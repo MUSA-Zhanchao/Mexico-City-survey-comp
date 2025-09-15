@@ -1,6 +1,6 @@
 # Mexico City Household Travel Survey Comparison across Years
 
-Zhanchao Yang
+**Zhanchao Yang**
 
 Mexico City Travel Survey Comparison (2007-2017)
 
