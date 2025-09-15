@@ -27,7 +27,7 @@ outside_mexico_city_trips_2017[outside_mexico_city_trips_2017 == 2] <- NA
 one_mode_outside <- outside_mexico_city_trips_2017 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 1)
 
-n_total_outside <- nrow(one_mode_outside)
+n_one_outside <- nrow(one_mode_outside)
 
 summary_tbl_outside <- one_mode_outside %>%
   summarise(across(starts_with("P5_14_"), ~ sum(!is.na(.)))) %>%
@@ -53,7 +53,7 @@ summary_tbl_one_mode_plus_outside <- two_one_combined_walking_outside %>%
 summary_one_outside <- rbind(summary_tbl_outside, summary_tbl_one_mode_plus_outside) %>%
   group_by(column) %>%
   summarise(n_valid = sum(n_valid))
-
+n_total_outside_one<- sum(summary_one_outside$n_valid)
 # Actual two mode processing
 two_mode_outside <- two_mode_outside %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
@@ -272,10 +272,13 @@ complete_outside <- complete_outside %>%
   summarise(n = sum(n), .groups = 'drop')
 
 # Save outside Mexico City multimodal results
-write.csv(complete_outside, "data/2017/mode_combination_outside_mexico_city_2017.csv", row.names = FALSE)
+#write.csv(complete_outside, "data/2017/mode_combination_outside_mexico_city_2017.csv", row.names = FALSE)
 
 sum(complete_outside$n)+sum(summary_one_outside$n_valid)
 
+
+
+######
 # === WEIGHTED ANALYSIS FOR OUTSIDE MEXICO CITY ===
 # Weighted two mode
 mode2_weighted_outside <- two_mode_combined_outside %>%
