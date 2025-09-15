@@ -271,7 +271,7 @@ complete_outside <- complete_outside %>%
   group_by(P5_14_merged) %>%
   summarise(n = sum(n), .groups = 'drop')
 
-# Save outside Mexico City multimodal results
+#Save outside Mexico City multimodal results
 #write.csv(complete_outside, "data/2017/mode_combination_outside_mexico_city_2017.csv", row.names = FALSE)
 
 sum(complete_outside$n)+sum(summary_one_outside$n_valid)
