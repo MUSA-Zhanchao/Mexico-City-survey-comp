@@ -74,3 +74,33 @@ Overall, multimodality increased from 2007 to 2017. Bus-only trips decreased fro
 - **High-capacity transit is disproportionately important in multimodal contexts**, even as its share in single-mode trips fell. This suggests its primary role lies in enabling longer, more complex travel chains rather than acting as a stand-alone mode.
 
 Together, these results demonstrate that while Mexico City’s mobility remains bus-dominated with the higher share of multimodal connected trips. These patterns have direct implications for how future investments in infrastructure, integration, and service design can better support sustainable mobility.
+
+
+## Mexico City Core and Surrounding areas trip Comparison 
+To understand the differences in travel mode choices between Mexico City's core and its surrounding suburban areas, we divided the dataset into two groups based on their household addresses in 2007 and 2017. The core area includes the `ENT=09`, while the surrounding suburban areas encompass `ENT=15, 13`. In both years, the trips is roughly evenly split between the core and surrounding areas.
+
+### Single-mode trips comparison
+- **Mexico City core**: From 2007 to 2017, single-mode trips increase from 76.24% to 78.98% (exlucing walking), with non-BRT bus remaining the dominant mode, but decreasing from 32.2% to 29.7%. Automobile usage is the second most common mode, increase from 27.6% to 30%. Single trip metro also increase from 6.5% to 6.8%.
+- **Surrounding suburban areas**: Single-mode trips also increased from 77% to around 80% (excluding walking). Non-BRT bus remains the most used mode, increasing from 32.58% to 41.52%. Automobile usage decreased from 28.7% to 24.3%. Metro usage decreased from 5.7% to 1.0%.
+
+![](../mex-city-plot/Rplot.png)
+![](../mex-city-plot/Rplot01.png)
+![](../Mex-out-plot/Rplot.png)
+![](../Mex-out-plot/Rplot01.png)
+
+### Multimodal trips comparison
+There is no dramatic difference in multimodal trips between Mexico City core and surrounding suburban areas and the overall trends listed in above section. However, the core area has a slightly higher share of multimodal trips involving high-capacity transit (Metro/BRT) compared to the surrounding areas. Multimodal trips share generally decrease over years in both areas.
+
+### High Capacity Transit + Bus connectivity comparison
+- **Mexico City core**: The share of bus only and bus+high-capacity trips decreased from 2007 to 2017, while high-capacity only trips increased slightly (from 8.53% to 10.13%), which potentially suggests improved accessibility to high-capacity transit in the core area. The share of high-capacity transit + bus trips decreased from 17.14% to 16.1%.
+- **Surrounding suburban areas**: The surrounding suburban areas saw a completely different trend. The share of bus only trips increased dramatically from 35% to 43%, while high-capacity only trips decreased from 7.4% to 2.2%. The share of high-capacity transit + bus trips stayed relatively stable, slightly decreasing from 16.77% to 15.21%.
+![](../mex-city-plot/Rplot08.png)
+![](../mex-city-plot/Rplot09.png)
+![](../Mex-out-plot/Rplot10.png)
+![](../Mex-out-plot/Rplot11.png)
+
+### Key takeaways and insights
+- **Single-mode trips increased** in both Mexico City core and surrounding suburban areas.
+- **Non-BRT bus remains the dominant mode** in both areas, with significant growth in suburban areas.
+- **High-capacity transit (Metro/BRT) usage decreased in surrounding suburban areas**.
+
