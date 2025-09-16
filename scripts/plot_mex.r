@@ -242,6 +242,8 @@ ggplot(non_brt_2017,
     plot.title = element_text(hjust = 0.5),
     plot.margin = margin(5.5, 28, 5.5, 5.5)     # extra right margin for text
   )
+
+
 highcap<-read.csv("data/high-cap-mex.csv")
 
 maxy9 <- max(highcap$X2007, na.rm = TRUE)
