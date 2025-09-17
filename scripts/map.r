@@ -90,6 +90,10 @@ ggplot(complete, aes(fill = n_cat)) +
 ##### 2007
 
 
+municipio_09<-st_read("mapping/MEX_Municipio_09_07.geojson")
+municipio_13<-st_read("mapping/MEX_Municipio_13_07.geojson")
+municipio_15<-st_read("mapping/MEX_Municipio_15_07.geojson")
+
 vivida<- read.dbf("data/2007/TVIVIENDA.DBF", as.is = TRUE)
 
 vivida_mun_15<- vivida %>%
@@ -97,9 +101,7 @@ vivida_mun_15<- vivida %>%
   group_by(MUN)%>%
   summarise(n = n())
 
-vivida_mun_15<- vivida_mun_15%>%
-  mutate(MUN = paste0("15", MUN))
-complete_mun_15_07<- left_join(municipio_15, vivida_mun_15, by = c("ID" = "MUN"))
+complete_mun_15_07<- left_join(municipio_15, vivida_mun_15, by = c("CVE_MUN" = "MUN"))
 complete_mun_15_07<- complete_mun_15_07 %>%
   filter(!is.na(n))
 
@@ -107,9 +109,8 @@ vivida_mun_13<- vivida %>%
   filter(ENT == 13) %>%
   group_by(MUN)%>%
   summarise(n = n())
-vivida_mun_13<- vivida_mun_13%>%
-  mutate(MUN = paste0("13", MUN))
-complete_mun_13_07<- left_join(municipio_13, vivida_mun_13, by= c("ID" = "MUN"))
+
+complete_mun_13_07<- left_join(municipio_13, vivida_mun_13, by= c("CVE_MUN" = "MUN"))
 complete_mun_13_07<- complete_mun_13_07 %>%
   filter(!is.na(n))
 
@@ -117,12 +118,12 @@ vivida_mun_09<- vivida %>%
   filter(ENT == "09") %>%
   group_by(MUN)%>%
   summarise(n = n())
-vivida_mun_09<- vivida_mun_09%>%
-  mutate(MUN = paste0("09", MUN))
-complete_mun_09_07<- left_join(municipio_09, vivida_mun_09, by = c("ID" = "MUN"))
+
+complete_mun_09_07<- left_join(municipio_09, vivida_mun_09, by = c("CVE_MUN" = "MUN"))
 complete_mun_09<- complete_mun_09_07 %>%
   filter(!is.na(n))
 complete_07<-rbind(complete_mun_09_07,complete_mun_13_07,complete_mun_15_07)
+#st_write(complete_07, "mapping/sample_size_2007.geojson")
 complete_07 <- complete_07 %>%
   mutate(n_cat = ntile(n, 5)) %>%   # split into 5 equal quantile bins
   group_by(n_cat) %>%
@@ -132,7 +133,8 @@ complete_07 <- complete_07 %>%
     n_cat = factor(n_cat, levels = sort(unique(n_cat))),
     label_range = factor(label_range, levels = unique(label_range[order(n_cat)]))
   )
-
+complete_07<- st_read("mapping/sample_size_2007.geojson")
+complete_07 <- st_make_valid(complete_07)
 ggplot(complete_07, aes(fill = n_cat)) +
   geom_sf() +
   scale_fill_manual(
