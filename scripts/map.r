@@ -177,25 +177,25 @@ ggplot(complete_07, aes(fill = n_cat)) +
 # complete_07 <- st_read("mapping/sample_size_2007.geojson") %>%
 #   st_drop_geometry() %>%
 #   select(CVE_ENT, CVE_MUN, n, n_cat, label_range)
-# 
+#
 # shp <- st_read("mgm2007/Municipios_2007.shp")
-# 
+#
 # complete_07 <- left_join(shp, complete_07, by = c("CVE_ENT", "CVE_MUN")) %>%
 #   filter(!is.na(n)) %>%
 #   mutate(
 #     # ensure n_cat is an ordered factor 1..5 (as character to match scale names)
 #     n_cat = factor(as.character(n_cat), levels = c("1","2","3","4","5"))
 #   )
-# 
+#
 # # build a lookup so labels match the n_cat levels
 # lab_lut <- complete_07 %>%
 #   distinct(n_cat, label_range) %>%
 #   arrange(as.numeric(as.character(n_cat)))
-# 
+#
 # # palette named by the n_cat levels
 # pal <- c("#0081a7", "#00afb9", "#fdfcdc", "#fed9b7", "#f07167")
 # names(pal) <- levels(complete_07$n_cat)
-# 
+#
 # ggplot(complete_07, aes(fill = n_cat)) +
 #   geom_sf() +
 #   scale_fill_manual(
