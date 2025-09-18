@@ -57,6 +57,7 @@ complete <- complete %>%
     n_cat = factor(n_cat, levels = sort(unique(n_cat))),
     label_range = factor(label_range, levels = unique(label_range[order(n_cat)]))
   )
+#st_write(complete, "mapping/sample_size_2017.geojson")
 
 ggplot(complete, aes(fill = n_cat)) +
   geom_sf() +
