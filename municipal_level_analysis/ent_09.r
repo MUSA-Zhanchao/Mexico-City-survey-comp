@@ -47,4 +47,3 @@ single_mode_mex_c<-major_mex_single%>%
   summarise(
     count = n()
   )
-
