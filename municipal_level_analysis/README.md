@@ -12,10 +12,10 @@ This analysis examines trip distribution patterns across municipalities in Mexic
 - **Average per municipality**: 545 trips
 - **Range**: 144 - 1,382 trips per municipality
 
-### 2. Bus-only trips  
+### 2. Bus-only trips
 - Trips using only bus systems (modes 4, 5, 7)
 - Includes internal transfers within bus systems
-- **Total**: 37,077 trips across 16 municipalities  
+- **Total**: 37,077 trips across 16 municipalities
 - **Average per municipality**: 2,317 trips
 - **Range**: 349 - 5,931 trips per municipality
 
@@ -23,7 +23,7 @@ This analysis examines trip distribution patterns across municipalities in Mexic
 - Trips using both bus and metro systems (combination of modes)
 - Represents intermodal transfer behavior
 - **Total**: 17,964 trips across 16 municipalities
-- **Average per municipality**: 1,123 trips  
+- **Average per municipality**: 1,123 trips
 - **Range**: 211 - 3,000 trips per municipality
 
 ## Key Findings
@@ -37,7 +37,7 @@ This analysis examines trip distribution patterns across municipalities in Mexic
 ## Top Municipalities by Trip Volume
 
 1. **MUN 007**: 10,292 total trips (1,361 metro-only, 5,931 bus-only, 3,000 transfers)
-2. **MUN 005**: 9,793 total trips (1,382 metro-only, 5,831 bus-only, 2,580 transfers)  
+2. **MUN 005**: 9,793 total trips (1,382 metro-only, 5,831 bus-only, 2,580 transfers)
 3. **MUN 010**: 6,027 total trips (753 metro-only, 3,561 bus-only, 1,713 transfers)
 
 ## Files
