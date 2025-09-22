@@ -69,7 +69,7 @@ bus_07 <- complete_07 %>%
     label_range = factor(label_range, levels = unique(label_range[order(n_cat)]))
   )
 bus_metro_07 <- complete_07 %>%
-  mutate(n_cat = ntile(bus_metro_count, 5)) %>% 
+  mutate(n_cat = ntile(bus_metro_count, 5)) %>%
   group_by(n_cat) %>%
   mutate(label_range = paste0(min(bus_metro_count), " – ", max(bus_metro_count))) %>%
   ungroup() %>%
@@ -81,7 +81,7 @@ bus_metro_07 <- complete_07 %>%
 
 ## 2017 ready to use
 metro_17 <- complete_17 %>%
-  mutate(n_cat = ntile(metro_only_count, 6)) %>%  
+  mutate(n_cat = ntile(metro_only_count, 6)) %>%
   group_by(n_cat) %>%
   mutate(label_range = paste0(min(metro_only_count), " – ", max(metro_only_count))) %>%
   ungroup() %>%
