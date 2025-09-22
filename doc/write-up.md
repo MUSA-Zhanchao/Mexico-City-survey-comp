@@ -103,3 +103,38 @@ There is no dramatic difference in multimodal trips between Mexico City core and
 - **Single-mode trips increased** in both Mexico City core and surrounding suburban areas.
 - **Non-BRT bus remains the dominant mode** in both areas, with significant growth in suburban areas.
 - **High-capacity transit (Metro/BRT) usage decreased in surrounding suburban areas**.
+
+
+## Sampling Examination
+To ensure the reliability of our analysis, we examined the sampling method used in both the 2007 and 2017 Mexico City Household Travel Surveys. We examined the sampling from 2 perspectives: spatial distribution of sampling households at municipality level and trips categories distribution at municipality level.
+
+### Spatial distribution of sampling households at municipality level
+![](../mapping/Rplot.png)
+![](../mapping/Rplot01.png)
+Above two maps show the spatial distribution of sampled households in 2007 and 2017 at the municipality level. The color gradient represents the number of sampled households in each municipality, with red colors indicating a higher number of samples, and green represents a smaller number of sample. The break down of color gradient is based on quantile. 
+
+Overall, the spatial distribution of sampled households is quite similar between 2007 and 2017. The core area of Mexico City (central municipalities) has a higher concentration of sampled households in both years, while the surrounding suburban areas have fewer samples. This consistency in spatial distribution suggests that the sampling suggests that the spatial distribution of sample household isn't a contributing factors to the observed changes in travel behavior between 2007 and 2017.
+
+### Trips categories distribution at municipality level
+To further validate the sampling method, we examined the distribution of trip categories (high-capacities only, bus only, and bus + high capacities) at the municipality level for both years. The following maps illustrate the trip number in each category across different municipalities, over time. 
+
+### High-capacities only trips
+![](../municipal_level_analysis/map/metro%20only_2007.png)
+![](../municipal_level_analysis/map/metro_only_2017.png)
+The above maps show the distribution of high-capacities only trips in 2007 and 2017. The color gradient represents the number of high-capacities only trips in each municipality, with higher numbers indicated by dark red colors and lower numbers by light yellow colors. The break down of color gradient is based on quantile (`ntile=6` in 2007, and matching break down in 2017).
+
+Overall, there is a noticeable differences in trip distribution between 2007 and 2017. There is dramatic decrease in high-capacities only trips in most municipalities, especially in the suburban areas. This trends may indicate a shift in travel behavior, but more likely caused by sampling bias.
+
+### Bus only trips
+![](../municipal_level_analysis/map/bus_only_2007.png)
+![](../municipal_level_analysis/map/bus_only_2017.png)
+The above maps show the distribution of bus only trips in 2007 and 2017. The color gradient represents the number of bus only trips in each municipality, with higher numbers indicated by dark red colors and lower numbers by light yellow colors. The break down of color gradient is based on quantile (`ntile=6` in 2007, and matching break down in 2017).
+
+Like the high capacities only trips, there is some differences in bus only trip distribution between 2007 and 2017, but less dramatic. There is a slight increase in bus only trips in most municipalities, especially in the suburban areas on the west side or east side of Mexico City. This trend may indicate a shift in travel behavior, but more likely caused by sampling bias.
+
+### Bus + high capacities trips
+![](../municipal_level_analysis/map/bus_metro_2007.png)
+![](../municipal_level_analysis/map/bus_metro_2017.png)
+The above maps show the distribution of bus + high capacities trips in 2007 and 2017. The color gradient represents the number of bus + high capacities trips in each municipality, with higher numbers indicated by dark red colors and lower numbers by light yellow colors. The break down of color gradient is based on quantile (`ntile=6` in 2007, and matching break down in 2017).
+
+The transfer trips shows some shifted between 2007 and 2017, but the changes are not as dramatic as the high capacities only trips. There is a slight increase in bus + high capacities trips in east side of Mexico City, but a slight decrease in north side of Mexico City. This trend may indicate a shift in travel behavior, but more likely caused by sampling bias.
