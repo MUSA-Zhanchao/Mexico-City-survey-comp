@@ -56,49 +56,49 @@ metro_only_trips <- major_mex %>%
     # Categorize all trip segments
     trip1_cat = case_when(
       trip1 %in% c("1", "2", "6") ~ "Metro",
-      trip1 == "3" ~ "BRT",
+      trip1 == "3" ~ "Metro",
       trip1 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip1) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip2_cat = case_when(
       trip2 %in% c("1", "2", "6") ~ "Metro",
-      trip2 == "3" ~ "BRT",
+      trip2 == "3" ~ "Metro",
       trip2 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip2) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip3_cat = case_when(
       trip3 %in% c("1", "2", "6") ~ "Metro",
-      trip3 == "3" ~ "BRT",
+      trip3 == "3" ~ "Metro",
       trip3 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip3) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip4_cat = case_when(
       trip4 %in% c("1", "2", "6") ~ "Metro",
-      trip4 == "3" ~ "BRT",
+      trip4 == "3" ~ "Metro",
       trip4 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip4) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip5_cat = case_when(
       trip5 %in% c("1", "2", "6") ~ "Metro",
-      trip5 == "3" ~ "BRT",
+      trip5 == "3" ~ "Metro",
       trip5 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip5) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip6_cat = case_when(
       trip6 %in% c("1", "2", "6") ~ "Metro",
-      trip6 == "3" ~ "BRT",
+      trip6 == "3" ~ "Metro",
       trip6 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip6) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip7_cat = case_when(
       trip7 %in% c("1", "2", "6") ~ "Metro",
-      trip7 == "3" ~ "BRT",
+      trip7 == "3" ~ "Metro",
       trip7 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip7) ~ NA_character_,
       TRUE ~ "Other"
@@ -128,49 +128,49 @@ bus_only_trips <- major_mex %>%
     # Categorize all trip segments (reusing the same logic)
     trip1_cat = case_when(
       trip1 %in% c("1", "2", "6") ~ "Metro",
-      trip1 == "3" ~ "BRT",
+      trip1 == "3" ~ "Metro",
       trip1 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip1) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip2_cat = case_when(
       trip2 %in% c("1", "2", "6") ~ "Metro",
-      trip2 == "3" ~ "BRT",
+      trip2 == "3" ~ "Metro",
       trip2 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip2) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip3_cat = case_when(
       trip3 %in% c("1", "2", "6") ~ "Metro",
-      trip3 == "3" ~ "BRT",
+      trip3 == "3" ~ "Metro",
       trip3 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip3) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip4_cat = case_when(
       trip4 %in% c("1", "2", "6") ~ "Metro",
-      trip4 == "3" ~ "BRT",
+      trip4 == "3" ~ "Metro",
       trip4 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip4) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip5_cat = case_when(
       trip5 %in% c("1", "2", "6") ~ "Metro",
-      trip5 == "3" ~ "BRT",
+      trip5 == "3" ~ "Metro",
       trip5 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip5) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip6_cat = case_when(
       trip6 %in% c("1", "2", "6") ~ "Metro",
-      trip6 == "3" ~ "BRT",
+      trip6 == "3" ~ "Metro",
       trip6 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip6) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip7_cat = case_when(
       trip7 %in% c("1", "2", "6") ~ "Metro",
-      trip7 == "3" ~ "BRT",
+      trip7 == "3" ~ "Metro",
       trip7 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip7) ~ NA_character_,
       TRUE ~ "Other"
@@ -200,49 +200,49 @@ bus_metro_trips <- major_mex %>%
     # Categorize all trip segments
     trip1_cat = case_when(
       trip1 %in% c("1", "2", "6") ~ "Metro",
-      trip1 == "3" ~ "BRT",
+      trip1 == "3" ~ "Metro",
       trip1 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip1) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip2_cat = case_when(
       trip2 %in% c("1", "2", "6") ~ "Metro",
-      trip2 == "3" ~ "BRT",
+      trip2 == "3" ~ "Metro",
       trip2 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip2) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip3_cat = case_when(
       trip3 %in% c("1", "2", "6") ~ "Metro",
-      trip3 == "3" ~ "BRT",
+      trip3 == "3" ~ "Metro",
       trip3 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip3) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip4_cat = case_when(
       trip4 %in% c("1", "2", "6") ~ "Metro",
-      trip4 == "3" ~ "BRT",
+      trip4 == "3" ~ "Metro",
       trip4 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip4) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip5_cat = case_when(
       trip5 %in% c("1", "2", "6") ~ "Metro",
-      trip5 == "3" ~ "BRT",
+      trip5 == "3" ~ "Metro",
       trip5 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip5) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip6_cat = case_when(
       trip6 %in% c("1", "2", "6") ~ "Metro",
-      trip6 == "3" ~ "BRT",
+      trip6 == "3" ~ "Metro",
       trip6 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip6) ~ NA_character_,
       TRUE ~ "Other"
     ),
     trip7_cat = case_when(
       trip7 %in% c("1", "2", "6") ~ "Metro",
-      trip7 == "3" ~ "BRT",
+      trip7 == "3" ~ "Metro",
       trip7 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip7) ~ NA_character_,
       TRUE ~ "Other"
