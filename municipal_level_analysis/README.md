@@ -26,7 +26,7 @@ The analysis categorizes trips into three main types:
 - Uses SORDENTRAN field with trip segments (1-7 characters)
 - Mode codes: 1,2,6=Metro; 3=BRT; 4,5,7=Bus; Others=Other
 
-### 2017 Data Format  
+### 2017 Data Format
 - Uses P5_14_XX columns as mode indicators
 - Mode mapping:
   - Metro: P5_14_05, P5_14_12, P5_14_13, P5_14_15
@@ -40,7 +40,7 @@ The analysis categorizes trips into three main types:
 CSV files with columns:
 - `MUN`: Municipality code (2-digit)
 - `metro_only_count`: Number of metro-only trips
-- `bus_only_count`: Number of bus-only trips  
+- `bus_only_count`: Number of bus-only trips
 - `bus_metro_count`: Number of bus+metro transfer trips
 
 ## Usage
@@ -51,7 +51,7 @@ Run the analysis scripts from the project root directory:
 # For 2007 data
 source('municipal_level_analysis/ent_09_07.r')
 
-# For 2017 data  
+# For 2017 data
 source('municipal_level_analysis/ent_09_17.r')
 ```
 
@@ -71,7 +71,7 @@ install.packages(c("tidyverse", "foreign"))
 ## Results Summary
 
 ### 2007 vs 2017 Comparison
-- **Metro-only trips**: 8,726 (2007) → 7,307 (2017) 
+- **Metro-only trips**: 8,726 (2007) → 7,307 (2017)
 - **Bus-only trips**: 37,077 (2007) → 33,159 (2017)
 - **Bus+Metro transfers**: 17,964 (2007) → 14,334 (2017)
 - **Total municipalities**: 16 (both years)

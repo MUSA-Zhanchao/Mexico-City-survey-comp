@@ -142,7 +142,7 @@ bus_metro_trips <- mexico_city_trips_2017 %>%
   ungroup() %>%
   filter(
     # Bus+Metro transfer trips: exactly 2 modes used, and they are Bus and Metro
-    lengths(unique_modes) == 2 & 
+    lengths(unique_modes) == 2 &
     sapply(unique_modes, function(x) "Bus" %in% x & "Metro" %in% x)
   )
 
