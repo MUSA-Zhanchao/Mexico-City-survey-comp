@@ -56,7 +56,7 @@ metro_only_trips <- major_mex %>%
     # Categorize all trip segments
     trip1_cat = case_when(
       trip1 %in% c("1", "2", "6") ~ "Metro",
-      trip1 == "3" ~ "BRT",
+      trip1 == "3" ~ "BRT", 
       trip1 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip1) ~ NA_character_,
       TRUE ~ "Other"
@@ -64,7 +64,7 @@ metro_only_trips <- major_mex %>%
     trip2_cat = case_when(
       trip2 %in% c("1", "2", "6") ~ "Metro",
       trip2 == "3" ~ "BRT",
-      trip2 %in% c("4", "5", "7") ~ "Bus",
+      trip2 %in% c("4", "5", "7") ~ "Bus", 
       is.na(trip2) ~ NA_character_,
       TRUE ~ "Other"
     ),
@@ -72,7 +72,7 @@ metro_only_trips <- major_mex %>%
       trip3 %in% c("1", "2", "6") ~ "Metro",
       trip3 == "3" ~ "BRT",
       trip3 %in% c("4", "5", "7") ~ "Bus",
-      is.na(trip3) ~ NA_character_,
+      is.na(trip3) ~ NA_character_, 
       TRUE ~ "Other"
     ),
     trip4_cat = case_when(
@@ -83,7 +83,7 @@ metro_only_trips <- major_mex %>%
       TRUE ~ "Other"
     ),
     trip5_cat = case_when(
-      trip5 %in% c("1", "2", "6") ~ "Metro",
+      trip5 %in% c("1", "2", "6") ~ "Metro", 
       trip5 == "3" ~ "BRT",
       trip5 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip5) ~ NA_character_,
@@ -91,7 +91,7 @@ metro_only_trips <- major_mex %>%
     ),
     trip6_cat = case_when(
       trip6 %in% c("1", "2", "6") ~ "Metro",
-      trip6 == "3" ~ "BRT",
+      trip6 == "3" ~ "BRT", 
       trip6 %in% c("4", "5", "7") ~ "Bus",
       is.na(trip6) ~ NA_character_,
       TRUE ~ "Other"
@@ -122,7 +122,7 @@ metro_only_by_mun <- metro_only_trips %>%
     .groups = 'drop'
   )
 
-# Bus-only trips (same principle)
+# Bus-only trips (same principle)  
 bus_only_trips <- major_mex %>%
   mutate(
     # Categorize all trip segments (reusing the same logic)
@@ -256,7 +256,7 @@ bus_metro_trips <- major_mex %>%
   ungroup() %>%
   filter(
     # Bus+Metro transfer trips: exactly 2 modes used, and they are Bus and Metro
-    lengths(unique_modes) == 2 &
+    lengths(unique_modes) == 2 & 
     sapply(unique_modes, function(x) "Bus" %in% x & "Metro" %in% x)
   )
 
@@ -282,3 +282,4 @@ spatial_distribution_ent09 <- major_mex %>%
 
 # Export results
 write.csv(spatial_distribution_ent09, "municipal_level_analysis/export/ent09_trip_categories_07.csv", row.names = FALSE)
+
