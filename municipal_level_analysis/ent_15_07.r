@@ -281,4 +281,4 @@ spatial_distribution_ent15 <- major_mex %>%
 
 
 # Export results
-write.csv(spatial_distribution_ent15, "municipal_level_analysis/export/ent09_trip_categories_15.csv", row.names = FALSE)
+write.csv(spatial_distribution_ent15, "municipal_level_analysis/export/ent15_trip_categories_07.csv", row.names = FALSE)
