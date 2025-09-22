@@ -21,4 +21,3 @@ mexico_city_trips_2017 <- complete_trip_2017 %>%
   select(starts_with("P5_14"), MUN)
 
 mexico_city_trips_2017[mexico_city_trips_2017 == 2] <- NA
-
