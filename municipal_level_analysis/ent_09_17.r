@@ -37,7 +37,7 @@ metro_only_trips <- mexico_city_trips_2017 %>%
     P5_14_08 = ifelse(is.na(P5_14_08), NA, "Bus"),
     P5_14_09 = ifelse(is.na(P5_14_09), NA, "Other"),
     P5_14_10 = ifelse(is.na(P5_14_10), NA, "Bus"),
-    P5_14_11 = ifelse(is.na(P5_14_11), NA, "BRT"),
+    P5_14_11 = ifelse(is.na(P5_14_11), NA, "Metro"),
     P5_14_12 = ifelse(is.na(P5_14_12), NA, "Metro"),
     P5_14_13 = ifelse(is.na(P5_14_13), NA, "Metro"),
     P5_14_14 = ifelse(is.na(P5_14_14), NA, NA),
@@ -80,7 +80,7 @@ bus_only_trips <- mexico_city_trips_2017 %>%
     P5_14_08 = ifelse(is.na(P5_14_08), NA, "Bus"),
     P5_14_09 = ifelse(is.na(P5_14_09), NA, "Other"),
     P5_14_10 = ifelse(is.na(P5_14_10), NA, "Bus"),
-    P5_14_11 = ifelse(is.na(P5_14_11), NA, "BRT"),
+    P5_14_11 = ifelse(is.na(P5_14_11), NA, "Metro"),
     P5_14_12 = ifelse(is.na(P5_14_12), NA, "Metro"),
     P5_14_13 = ifelse(is.na(P5_14_13), NA, "Metro"),
     P5_14_14 = ifelse(is.na(P5_14_14), NA, NA),
@@ -123,7 +123,7 @@ bus_metro_trips <- mexico_city_trips_2017 %>%
     P5_14_08 = ifelse(is.na(P5_14_08), NA, "Bus"),
     P5_14_09 = ifelse(is.na(P5_14_09), NA, "Other"),
     P5_14_10 = ifelse(is.na(P5_14_10), NA, "Bus"),
-    P5_14_11 = ifelse(is.na(P5_14_11), NA, "BRT"),
+    P5_14_11 = ifelse(is.na(P5_14_11), NA, "Metro"),
     P5_14_12 = ifelse(is.na(P5_14_12), NA, "Metro"),
     P5_14_13 = ifelse(is.na(P5_14_13), NA, "Metro"),
     P5_14_14 = ifelse(is.na(P5_14_14), NA, NA),
@@ -165,10 +165,4 @@ spatial_distribution_ent09_2017 <- mexico_city_trips_2017 %>%
     bus_metro_count = ifelse(is.na(bus_metro_count), 0, bus_metro_count),
   )
 
-# Create export directory if it doesn't exist
-if (!dir.exists("municipal_level_analysis/export")) {
-  dir.create("municipal_level_analysis/export", recursive = TRUE)
-}
-
-# Export results
 write.csv(spatial_distribution_ent09_2017, "municipal_level_analysis/export/ent09_trip_categories_17.csv", row.names = FALSE)
