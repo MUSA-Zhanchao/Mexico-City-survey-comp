@@ -277,71 +277,9 @@ spatial_distribution_ent09 <- major_mex %>%
     metro_only_count = ifelse(is.na(metro_only_count), 0, metro_only_count),
     bus_only_count = ifelse(is.na(bus_only_count), 0, bus_only_count),
     bus_metro_count = ifelse(is.na(bus_metro_count), 0, bus_metro_count),
-    total_categorized_trips = metro_only_count + bus_only_count + bus_metro_count
-  ) %>%
-  arrange(desc(total_categorized_trips))
+  )
 
-# Print summary results
-cat("=== Trip Distribution Analysis for ENT=09 (Mexico City) ===\n")
-cat("Total municipalities analyzed:", nrow(spatial_distribution_ent09), "\n")
-cat("Total metro-only trips:", sum(spatial_distribution_ent09$metro_only_count), "\n")
-cat("Total bus-only trips:", sum(spatial_distribution_ent09$bus_only_count), "\n") 
-cat("Total bus+metro transfer trips:", sum(spatial_distribution_ent09$bus_metro_count), "\n")
-cat("Total categorized trips:", sum(spatial_distribution_ent09$total_categorized_trips), "\n\n")
-
-cat("Top 10 municipalities by total categorized trips:\n")
-print(head(spatial_distribution_ent09, 10))
 
 # Export results
-write.csv(spatial_distribution_ent09, "data/spatial_distribution_ent09_trip_categories.csv", row.names = FALSE)
+write.csv(spatial_distribution_ent09, "municipal_level_analysis/export/ent09_trip_categories_07.csv", row.names = FALSE)
 
-# Additional verification and validation
-cat("\n=== Validation and Verification ===\n")
-
-# Check some sample records for each category to verify logic
-cat("Sample metro-only trips (first 5):\n")
-metro_sample <- metro_only_trips %>% 
-  select(trip1, trip2, trip3, trip4, trip5, trip6, trip7, MUN, unique_modes) %>%
-  head(5)
-print(metro_sample)
-
-cat("\nSample bus-only trips (first 5):\n") 
-bus_sample <- bus_only_trips %>%
-  select(trip1, trip2, trip3, trip4, trip5, trip6, trip7, MUN, unique_modes) %>%
-  head(5)
-print(bus_sample)
-
-cat("\nSample bus+metro transfer trips (first 5):\n")
-bus_metro_sample <- bus_metro_trips %>%
-  select(trip1, trip2, trip3, trip4, trip5, trip6, trip7, MUN, unique_modes) %>%
-  head(5)
-print(bus_metro_sample)
-
-# Verify total trip counts
-total_trips_ent09 <- nrow(major_mex)
-cat("\nTotal trips in ENT=09:", total_trips_ent09, "\n")
-cat("Categorized trips:", sum(spatial_distribution_ent09$total_categorized_trips), "\n")
-cat("Percentage categorized:", round(sum(spatial_distribution_ent09$total_categorized_trips) / total_trips_ent09 * 100, 2), "%\n")
-
-# Check municipality distribution
-cat("\nMunicipality distribution summary:\n")
-cat("Municipalities with metro-only trips:", sum(spatial_distribution_ent09$metro_only_count > 0), "\n")
-cat("Municipalities with bus-only trips:", sum(spatial_distribution_ent09$bus_only_count > 0), "\n")
-cat("Municipalities with bus+metro transfer trips:", sum(spatial_distribution_ent09$bus_metro_count > 0), "\n")
-
-# Summary statistics by trip type
-cat("\n=== Summary Statistics by Trip Type ===\n")
-cat("Metro-only trips:\n")
-cat("  Mean per municipality:", round(mean(spatial_distribution_ent09$metro_only_count), 2), "\n")
-cat("  Range:", min(spatial_distribution_ent09$metro_only_count), "-", max(spatial_distribution_ent09$metro_only_count), "\n")
-
-cat("Bus-only trips:\n") 
-cat("  Mean per municipality:", round(mean(spatial_distribution_ent09$bus_only_count), 2), "\n")
-cat("  Range:", min(spatial_distribution_ent09$bus_only_count), "-", max(spatial_distribution_ent09$bus_only_count), "\n")
-
-cat("Bus+Metro transfer trips:\n")
-cat("  Mean per municipality:", round(mean(spatial_distribution_ent09$bus_metro_count), 2), "\n") 
-cat("  Range:", min(spatial_distribution_ent09$bus_metro_count), "-", max(spatial_distribution_ent09$bus_metro_count), "\n")
-
-cat("\n=== Analysis Complete ===\n")
-cat("Results saved to: data/spatial_distribution_ent09_trip_categories.csv\n")
