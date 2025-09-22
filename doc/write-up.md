@@ -111,12 +111,12 @@ To ensure the reliability of our analysis, we examined the sampling method used 
 ### Spatial distribution of sampling households at municipality level
 ![](../mapping/Rplot.png)
 ![](../mapping/Rplot01.png)
-Above two maps show the spatial distribution of sampled households in 2007 and 2017 at the municipality level. The color gradient represents the number of sampled households in each municipality, with red colors indicating a higher number of samples, and green represents a smaller number of sample. The break down of color gradient is based on quantile. 
+Above two maps show the spatial distribution of sampled households in 2007 and 2017 at the municipality level. The color gradient represents the number of sampled households in each municipality, with red colors indicating a higher number of samples, and green represents a smaller number of sample. The break down of color gradient is based on quantile.
 
 Overall, the spatial distribution of sampled households is quite similar between 2007 and 2017. The core area of Mexico City (central municipalities) has a higher concentration of sampled households in both years, while the surrounding suburban areas have fewer samples. This consistency in spatial distribution suggests that the sampling suggests that the spatial distribution of sample household isn't a contributing factors to the observed changes in travel behavior between 2007 and 2017.
 
 ### Trips categories distribution at municipality level
-To further validate the sampling method, we examined the distribution of trip categories (high-capacities only, bus only, and bus + high capacities) at the municipality level for both years. The following maps illustrate the trip number in each category across different municipalities, over time. 
+To further validate the sampling method, we examined the distribution of trip categories (high-capacities only, bus only, and bus + high capacities) at the municipality level for both years. The following maps illustrate the trip number in each category across different municipalities, over time.
 
 ### High-capacities only trips
 ![](../municipal_level_analysis/map/metro%20only_2007.png)
