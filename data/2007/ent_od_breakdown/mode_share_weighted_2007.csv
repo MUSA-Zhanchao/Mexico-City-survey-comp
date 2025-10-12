@@ -1,0 +1,25 @@
+"mode","n","type","share","category","is_transit"
+"Walking",1702302,"Single Mode",28.8324473134772,"City to City (ENT 09-09)",FALSE
+"Bus",1290671,"Single Mode",21.8605180552763,"City to City (ENT 09-09)",TRUE
+"Bus_Metro",1131288,"Multi Mode",19.1609959081109,"City to City (ENT 09-09)",TRUE
+"Bus",577342,"Multi Mode",9.77863081689241,"City to City (ENT 09-09)",TRUE
+"Other",515172,"Single Mode",8.72563713570136,"City to City (ENT 09-09)",FALSE
+"Metro",413258,"Single Mode",6.99948629084204,"City to City (ENT 09-09)",TRUE
+"Metro",121746,"Multi Mode",2.06205193357383,"City to City (ENT 09-09)",TRUE
+"Bus_Other",51087,"Multi Mode",0.865277275068473,"City to City (ENT 09-09)",FALSE
+"Bus_Metro_Other",49912,"Multi Mode",0.845375914679226,"City to City (ENT 09-09)",FALSE
+"Metro_Other",47250,"Multi Mode",0.800288747567588,"City to City (ENT 09-09)",FALSE
+"Other",3985,"Multi Mode",0.067495252043531,"City to City (ENT 09-09)",FALSE
+NA,106,"Multi Mode",0.00179535676702993,"City to City (ENT 09-09)",FALSE
+"Bus",1494419,"Single Mode",29.1763601079262,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Walking",1425005,"Single Mode",27.8211525921414,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Bus_Metro",682204,"Multi Mode",13.3190420966728,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Other",569043,"Single Mode",11.1097379549475,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Bus",431497,"Multi Mode",8.42435211108118,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Metro",296290,"Single Mode",5.78463184446761,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Metro",106837,"Multi Mode",2.08583722828103,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Bus_Other",51476,"Multi Mode",1.00499412341225,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Bus_Metro_Other",34043,"Multi Mode",0.664640122451689,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Metro_Other",28123,"Multi Mode",0.549060722136969,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Other",2927,"Multi Mode",0.0571454230947946,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+NA,156,"Multi Mode",0.00304567338667166,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE

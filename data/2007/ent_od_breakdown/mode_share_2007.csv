@@ -1,0 +1,25 @@
+"mode","n","type","share","category","is_transit"
+"Walking",19811,"Single Mode",28.6908037653874,"City to City (ENT 09-09)",FALSE
+"Bus",15608,"Single Mode",22.6039102099928,"City to City (ENT 09-09)",TRUE
+"Bus_Metro",13005,"Multi Mode",18.8341781317886,"City to City (ENT 09-09)",TRUE
+"Bus",6570,"Multi Mode",9.51484431571325,"City to City (ENT 09-09)",TRUE
+"Other",6167,"Single Mode",8.93120926864591,"City to City (ENT 09-09)",FALSE
+"Metro",5000,"Single Mode",7.24112961622013,"City to City (ENT 09-09)",TRUE
+"Metro",1218,"Multi Mode",1.76393917451122,"City to City (ENT 09-09)",TRUE
+"Bus_Other",554,"Multi Mode",0.80231716147719,"City to City (ENT 09-09)",FALSE
+"Bus_Metro_Other",539,"Multi Mode",0.78059377262853,"City to City (ENT 09-09)",FALSE
+"Metro_Other",528,"Multi Mode",0.764663287472846,"City to City (ENT 09-09)",FALSE
+"Other",49,"Multi Mode",0.0709630702389573,"City to City (ENT 09-09)",FALSE
+NA,1,"Multi Mode",0.00144822592324403,"City to City (ENT 09-09)",FALSE
+"Bus",14035,"Single Mode",29.5623051647148,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Walking",12702,"Single Mode",26.7545707304743,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Bus_Metro",6601,"Multi Mode",13.9038672171202,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Other",5323,"Single Mode",11.211980790294,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Bus",4090,"Multi Mode",8.61487909680681,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Metro",2686,"Single Mode",5.65759541663156,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Metro",968,"Multi Mode",2.0389249304912,"Suburb to Suburb (ENT 13/15 - 13/15)",TRUE
+"Bus_Other",442,"Multi Mode",0.930996714129244,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Bus_Metro_Other",315,"Multi Mode",0.663493133372651,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Metro_Other",286,"Multi Mode",0.602409638554217,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+"Other",26,"Multi Mode",0.0547645125958379,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
+NA,2,"Multi Mode",0.00421265481506445,"Suburb to Suburb (ENT 13/15 - 13/15)",FALSE
