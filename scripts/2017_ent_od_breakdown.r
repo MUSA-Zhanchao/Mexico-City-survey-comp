@@ -37,7 +37,7 @@ suburb_to_suburb <- trip_2017 %>%
 city_to_city[city_to_city == 2] <- NA
 suburb_to_suburb[suburb_to_suburb == 2] <- NA
 
-# mode 1 
+# mode 1
 city_1<- city_to_city%>%
   filter(rowSums(!is.na(select(., starts_with("P5_14_"))))==1)
 n_city_1 <- nrow(city_1)
@@ -118,5 +118,4 @@ summary_one<-rbind(summary_tbl_city_1, summary_tbl_one_mode_plus)%>%
   group_by(mode) %>%
   summarise(n = sum(n))%>%
   arrange(desc(n))
-    
 

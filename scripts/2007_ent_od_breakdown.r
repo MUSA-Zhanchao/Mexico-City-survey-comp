@@ -53,7 +53,7 @@ classify_trips <- function(df) {
   df_parsed <- df %>%
     separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6, remove = FALSE) %>%
     mutate(across(starts_with("trip"), ~ na_if(., "0")))
-  
+
   # Categorize each trip segment
   df_categorized <- df_parsed %>%
     mutate(
@@ -107,12 +107,12 @@ classify_trips <- function(df) {
         TRUE ~ "Other"
       )
     )
-  
+
   # Get unique modes for each trip
   df_with_modes <- df_categorized %>%
     rowwise() %>%
     mutate(
-      unique_modes = list(unique(na.omit(c(trip1_cat, trip2_cat, trip3_cat, 
+      unique_modes = list(unique(na.omit(c(trip1_cat, trip2_cat, trip3_cat,
                                            trip4_cat, trip5_cat, trip6_cat, trip7_cat))))
     ) %>%
     ungroup()
@@ -122,4 +122,3 @@ classify_trips <- function(df) {
 city_results <- classify_trips(city_to_city)
 
 suburb_results <- classify_trips(suburb_to_suburb)
-
