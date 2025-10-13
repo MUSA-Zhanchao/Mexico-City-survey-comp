@@ -45,11 +45,11 @@ process_mode_data_2007 <- function(trip_data, category_name) {
   trip_data <- trip_data %>%
     separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6, remove = FALSE) %>%
     mutate(across(starts_with("trip"), ~ na_if(., "0")))
-  
+
   # === SINGLE MODE ANALYSIS ===
   one_mode <- trip_data %>%
     filter(is.na(trip2))
-  
+
   # Classify single modes
   single_mode_classified <- one_mode %>%
     mutate(
@@ -62,19 +62,19 @@ process_mode_data_2007 <- function(trip_data, category_name) {
         TRUE ~ "Other"
       )
     )
-  
+
   single_mode_summary <- single_mode_classified %>%
     group_by(trip1_cat) %>%
     summarise(n = n(), .groups = 'drop')
-  
+
   single_mode_weighted <- single_mode_classified %>%
     group_by(trip1_cat) %>%
     summarise(weighted_n = sum(NFACTOR), .groups = 'drop')
-  
+
   # === MULTI MODE ANALYSIS (2+ modes) ===
   multi_mode <- trip_data %>%
     filter(!is.na(trip2))
-  
+
   if (nrow(multi_mode) > 0) {
     # Categorize all trip segments
     multi_mode_classified <- multi_mode %>%
@@ -142,7 +142,7 @@ process_mode_data_2007 <- function(trip_data, category_name) {
           TRUE ~ "Other"
         )
       )
-    
+
     # Create combined mode string
     multi_mode_combined <- multi_mode_classified %>%
       rowwise() %>%
@@ -155,11 +155,11 @@ process_mode_data_2007 <- function(trip_data, category_name) {
         }
       ) %>%
       ungroup()
-    
+
     multi_mode_summary <- multi_mode_combined %>%
       group_by(mode_merged) %>%
       summarise(n = n(), .groups = 'drop')
-    
+
     multi_mode_weighted <- multi_mode_combined %>%
       group_by(mode_merged) %>%
       summarise(weighted_n = sum(NFACTOR), .groups = 'drop')
@@ -167,7 +167,7 @@ process_mode_data_2007 <- function(trip_data, category_name) {
     multi_mode_summary <- tibble(mode_merged = character(), n = numeric())
     multi_mode_weighted <- tibble(mode_merged = character(), weighted_n = numeric())
   }
-  
+
   # === COMBINE ALL RESULTS ===
   # Rename columns to match
   single_mode_summary <- single_mode_summary %>%
@@ -178,21 +178,21 @@ process_mode_data_2007 <- function(trip_data, category_name) {
     rename(mode = mode_merged)
   multi_mode_weighted <- multi_mode_weighted %>%
     rename(mode = mode_merged)
-  
+
   all_modes <- bind_rows(
     single_mode_summary %>% mutate(type = "Single Mode"),
     multi_mode_summary %>% mutate(type = "Multi Mode")
   )
-  
+
   all_modes_weighted <- bind_rows(
     single_mode_weighted %>% rename(n = weighted_n) %>% mutate(type = "Single Mode"),
     multi_mode_weighted %>% rename(n = weighted_n) %>% mutate(type = "Multi Mode")
   )
-  
+
   # Calculate totals
   total_trips <- sum(all_modes$n)
   total_weighted_trips <- sum(all_modes_weighted$n)
-  
+
   # Calculate mode shares
   mode_share <- all_modes %>%
     mutate(
@@ -200,14 +200,14 @@ process_mode_data_2007 <- function(trip_data, category_name) {
       category = category_name
     ) %>%
     arrange(desc(n))
-  
+
   mode_share_weighted <- all_modes_weighted %>%
     mutate(
       share = n / total_weighted_trips * 100,
       category = category_name
     ) %>%
     arrange(desc(n))
-  
+
   # Calculate transit split (Bus, Metro vs Other)
   mode_share <- mode_share %>%
     rowwise() %>%
@@ -222,7 +222,7 @@ process_mode_data_2007 <- function(trip_data, category_name) {
       }
     ) %>%
     ungroup()
-  
+
   mode_share_weighted <- mode_share_weighted %>%
     rowwise() %>%
     mutate(
@@ -236,7 +236,7 @@ process_mode_data_2007 <- function(trip_data, category_name) {
       }
     ) %>%
     ungroup()
-  
+
   transit_split <- tibble(
     category = category_name,
     transit_trips = sum(mode_share$n[mode_share$is_transit]),
@@ -245,7 +245,7 @@ process_mode_data_2007 <- function(trip_data, category_name) {
     non_transit_share = sum(mode_share$share[!mode_share$is_transit]),
     total_trips = total_trips
   )
-  
+
   transit_split_weighted <- tibble(
     category = category_name,
     transit_trips = sum(mode_share_weighted$n[mode_share_weighted$is_transit]),
@@ -254,7 +254,7 @@ process_mode_data_2007 <- function(trip_data, category_name) {
     non_transit_share = sum(mode_share_weighted$share[!mode_share_weighted$is_transit]),
     total_trips = total_weighted_trips
   )
-  
+
   list(
     mode_share = mode_share,
     mode_share_weighted = mode_share_weighted,
@@ -300,4 +300,3 @@ if (!dir.exists("data/2007/ent_od_breakdown")) {
 # Save results
 write.csv(combined_mode_share, "data/2007/ent_od_breakdown/mode_share_2007.csv", row.names = FALSE)
 write.csv(combined_transit_split, "data/2007/ent_od_breakdown/transit_split_2007.csv", row.names = FALSE)
-
