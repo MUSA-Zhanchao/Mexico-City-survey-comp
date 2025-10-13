@@ -41,4 +41,3 @@ city_to_city <- complete_trip_2007 %>%
 suburb_to_suburb <- complete_trip_2007 %>%
   filter(origin_ent %in% c("13", "15") & dest_ent %in% c("13", "15")) %>%
   select(SORDENTRAN, NFACTOR)
-
