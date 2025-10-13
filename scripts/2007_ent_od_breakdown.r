@@ -116,50 +116,10 @@ classify_trips <- function(df) {
                                            trip4_cat, trip5_cat, trip6_cat, trip7_cat))))
     ) %>%
     ungroup()
-  
-  # Classify trips into categories
-  high_capacity_only <- df_with_modes %>%
-    filter(
-      lengths(unique_modes) >= 1 &
-      sapply(unique_modes, function(x) all(x %in% c("Metro", "BRT")) & length(x) > 0)
-    )
-  
-  bus_only <- df_with_modes %>%
-    filter(
-      lengths(unique_modes) == 1 &
-      sapply(unique_modes, function(x) "Bus" %in% x)
-    )
-  
-  high_capacity_bus <- df_with_modes %>%
-    filter(
-      lengths(unique_modes) >= 2 &
-      sapply(unique_modes, function(x) {
-        has_high_capacity <- any(x %in% c("Metro", "BRT"))
-        has_bus <- "Bus" %in% x
-        has_high_capacity && has_bus
-      })
-    )
-  
-  list(
-    high_capacity_only = nrow(high_capacity_only),
-    bus_only = nrow(bus_only),
-    high_capacity_bus = nrow(high_capacity_bus),
-    total = nrow(df)
-  )
 }
 
-# Classify city to city trips
-cat("\n=== City to City Trips (09 to 09) ===\n")
-city_results <- classify_trips(city_to_city)
-cat("High-capacity only (Metro/BRT):", city_results$high_capacity_only, "\n")
-cat("Bus only:", city_results$bus_only, "\n")
-cat("High-capacity + Bus:", city_results$high_capacity_bus, "\n")
-cat("Total trips:", city_results$total, "\n")
 
-# Classify suburb to suburb trips
-cat("\n=== Suburb to Suburb Trips (13/15 to 13/15) ===\n")
+city_results <- classify_trips(city_to_city)
+
 suburb_results <- classify_trips(suburb_to_suburb)
-cat("High-capacity only (Metro/BRT):", suburb_results$high_capacity_only, "\n")
-cat("Bus only:", suburb_results$bus_only, "\n")
-cat("High-capacity + Bus:", suburb_results$high_capacity_bus, "\n")
-cat("Total trips:", suburb_results$total, "\n")
+
