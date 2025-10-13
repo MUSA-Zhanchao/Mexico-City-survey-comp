@@ -118,4 +118,3 @@ summary_one<-rbind(summary_tbl_city_1, summary_tbl_one_mode_plus)%>%
   group_by(mode) %>%
   summarise(n = sum(n))%>%
   arrange(desc(n))
-
