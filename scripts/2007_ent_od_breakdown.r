@@ -299,21 +299,5 @@ if (!dir.exists("data/2007/ent_od_breakdown")) {
 
 # Save results
 write.csv(combined_mode_share, "data/2007/ent_od_breakdown/mode_share_2007.csv", row.names = FALSE)
-write.csv(combined_mode_share_weighted, "data/2007/ent_od_breakdown/mode_share_weighted_2007.csv", row.names = FALSE)
 write.csv(combined_transit_split, "data/2007/ent_od_breakdown/transit_split_2007.csv", row.names = FALSE)
-write.csv(combined_transit_split_weighted, "data/2007/ent_od_breakdown/transit_split_weighted_2007.csv", row.names = FALSE)
 
-# Print summary
-cat("\n=== 2007 ENT OD BREAKDOWN SUMMARY ===\n")
-cat("\nCity to City (ENT 09-09):\n")
-print(city_results$transit_split)
-cat("\nSuburb to Suburb (ENT 13/15 - 13/15):\n")
-print(suburb_results$transit_split)
-
-cat("\n=== WEIGHTED SUMMARY ===\n")
-cat("\nCity to City (ENT 09-09) - Weighted:\n")
-print(city_results$transit_split_weighted)
-cat("\nSuburb to Suburb (ENT 13/15 - 13/15) - Weighted:\n")
-print(suburb_results$transit_split_weighted)
-
-cat("\nResults saved to data/2007/ent_od_breakdown/\n")
