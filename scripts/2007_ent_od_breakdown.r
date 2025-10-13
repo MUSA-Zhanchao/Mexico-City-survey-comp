@@ -41,3 +41,125 @@ city_to_city <- complete_trip_2007 %>%
 suburb_to_suburb <- complete_trip_2007 %>%
   filter(origin_ent %in% c("13", "15") & dest_ent %in% c("13", "15")) %>%
   select(SORDENTRAN, NFACTOR)
+
+# Helper function for deduplication
+dedup_key <- function(v) {
+  paste(sort(unique(na.omit(v))), collapse = "_")
+}
+
+# Function to classify trips into mode categories
+classify_trips <- function(df) {
+  # Parse SORDENTRAN into individual trip segments
+  df_parsed <- df %>%
+    separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6, remove = FALSE) %>%
+    mutate(across(starts_with("trip"), ~ na_if(., "0")))
+  
+  # Categorize each trip segment
+  df_categorized <- df_parsed %>%
+    mutate(
+      trip1_cat = case_when(
+        trip1 %in% c("1", "2", "6") ~ "Metro",
+        trip1 == "3" ~ "BRT",
+        trip1 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip1) ~ NA_character_,
+        TRUE ~ "Other"
+      ),
+      trip2_cat = case_when(
+        trip2 %in% c("1", "2", "6") ~ "Metro",
+        trip2 == "3" ~ "BRT",
+        trip2 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip2) ~ NA_character_,
+        TRUE ~ "Other"
+      ),
+      trip3_cat = case_when(
+        trip3 %in% c("1", "2", "6") ~ "Metro",
+        trip3 == "3" ~ "BRT",
+        trip3 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip3) ~ NA_character_,
+        TRUE ~ "Other"
+      ),
+      trip4_cat = case_when(
+        trip4 %in% c("1", "2", "6") ~ "Metro",
+        trip4 == "3" ~ "BRT",
+        trip4 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip4) ~ NA_character_,
+        TRUE ~ "Other"
+      ),
+      trip5_cat = case_when(
+        trip5 %in% c("1", "2", "6") ~ "Metro",
+        trip5 == "3" ~ "BRT",
+        trip5 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip5) ~ NA_character_,
+        TRUE ~ "Other"
+      ),
+      trip6_cat = case_when(
+        trip6 %in% c("1", "2", "6") ~ "Metro",
+        trip6 == "3" ~ "BRT",
+        trip6 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip6) ~ NA_character_,
+        TRUE ~ "Other"
+      ),
+      trip7_cat = case_when(
+        trip7 %in% c("1", "2", "6") ~ "Metro",
+        trip7 == "3" ~ "BRT",
+        trip7 %in% c("4", "5", "7") ~ "Bus",
+        is.na(trip7) ~ NA_character_,
+        TRUE ~ "Other"
+      )
+    )
+  
+  # Get unique modes for each trip
+  df_with_modes <- df_categorized %>%
+    rowwise() %>%
+    mutate(
+      unique_modes = list(unique(na.omit(c(trip1_cat, trip2_cat, trip3_cat, 
+                                           trip4_cat, trip5_cat, trip6_cat, trip7_cat))))
+    ) %>%
+    ungroup()
+  
+  # Classify trips into categories
+  high_capacity_only <- df_with_modes %>%
+    filter(
+      lengths(unique_modes) >= 1 &
+      sapply(unique_modes, function(x) all(x %in% c("Metro", "BRT")) & length(x) > 0)
+    )
+  
+  bus_only <- df_with_modes %>%
+    filter(
+      lengths(unique_modes) == 1 &
+      sapply(unique_modes, function(x) "Bus" %in% x)
+    )
+  
+  high_capacity_bus <- df_with_modes %>%
+    filter(
+      lengths(unique_modes) >= 2 &
+      sapply(unique_modes, function(x) {
+        has_high_capacity <- any(x %in% c("Metro", "BRT"))
+        has_bus <- "Bus" %in% x
+        has_high_capacity && has_bus
+      })
+    )
+  
+  list(
+    high_capacity_only = nrow(high_capacity_only),
+    bus_only = nrow(bus_only),
+    high_capacity_bus = nrow(high_capacity_bus),
+    total = nrow(df)
+  )
+}
+
+# Classify city to city trips
+cat("\n=== City to City Trips (09 to 09) ===\n")
+city_results <- classify_trips(city_to_city)
+cat("High-capacity only (Metro/BRT):", city_results$high_capacity_only, "\n")
+cat("Bus only:", city_results$bus_only, "\n")
+cat("High-capacity + Bus:", city_results$high_capacity_bus, "\n")
+cat("Total trips:", city_results$total, "\n")
+
+# Classify suburb to suburb trips
+cat("\n=== Suburb to Suburb Trips (13/15 to 13/15) ===\n")
+suburb_results <- classify_trips(suburb_to_suburb)
+cat("High-capacity only (Metro/BRT):", suburb_results$high_capacity_only, "\n")
+cat("Bus only:", suburb_results$bus_only, "\n")
+cat("High-capacity + Bus:", suburb_results$high_capacity_bus, "\n")
+cat("Total trips:", suburb_results$total, "\n")
