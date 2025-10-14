@@ -331,38 +331,20 @@ city_mode6_combined <- city_six_mode_combined %>%
   summarise(n = n(), .groups = 'drop')
 
 # Combine all city multimodal trips
-city_complete <- rbind(city_mode2_combined, city_mode3_combined, city_mode4_combined,
+city_complete <- rbind(city_mode2_combined, city_mode3_combined, city_mode4_combined, 
                        city_mode5_combined, city_mode6_combined)
 city_complete <- city_complete %>%
   group_by(P5_14_merged) %>%
   summarise(n = sum(n), .groups = 'drop')
 
-# Weighted analysis for city trips
-city_mode2_weighted <- city_two_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
+city_complete<- city_complete %>%
+  rename(mode=P5_14_merged)
+# Final city summary
+city_final <- rbind(summary_one, city_complete) %>%
+  group_by(mode) %>%
+  summarise(n = sum(n))
 
-city_mode3_weighted <- city_three_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-city_mode4_weighted <- city_four_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-city_mode5_weighted <- city_five_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-city_mode6_weighted <- city_six_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-city_complete_weighted <- rbind(city_mode2_weighted, city_mode3_weighted, city_mode4_weighted,
-                                city_mode5_weighted, city_mode6_weighted)
-city_complete_weighted <- city_complete_weighted %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(weighted_n), .groups = 'drop')
+# write.csv(city_final, "data/city-city-suburb/2017_city_to_city_mode_breakdown.csv", row.names = FALSE)
 
 # === SUBURB TO SUBURB ANALYSIS ===
 
@@ -665,52 +647,16 @@ suburb_mode6_combined <- suburb_six_mode_combined %>%
   summarise(n = n(), .groups = 'drop')
 
 # Combine all suburb multimodal trips
-suburb_complete <- rbind(suburb_mode2_combined, suburb_mode3_combined, suburb_mode4_combined,
+suburb_complete <- rbind(suburb_mode2_combined, suburb_mode3_combined, suburb_mode4_combined, 
                          suburb_mode5_combined, suburb_mode6_combined)
 suburb_complete <- suburb_complete %>%
   group_by(P5_14_merged) %>%
   summarise(n = sum(n), .groups = 'drop')
 
-# Weighted analysis for suburb trips
-suburb_mode2_weighted <- suburb_two_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
-suburb_mode3_weighted <- suburb_three_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-suburb_mode4_weighted <- suburb_four_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-suburb_mode5_weighted <- suburb_five_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-suburb_mode6_weighted <- suburb_six_mode_combined %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(FACTOR), .groups = 'drop')
-
-suburb_complete_weighted <- rbind(suburb_mode2_weighted, suburb_mode3_weighted, suburb_mode4_weighted,
-                                  suburb_mode5_weighted, suburb_mode6_weighted)
-suburb_complete_weighted <- suburb_complete_weighted %>%
-  group_by(P5_14_merged) %>%
-  summarise(weighted_n = sum(weighted_n), .groups = 'drop')
-
-# Save results
-write.csv(city_complete, "data/2017/mode_combination_city_to_city_2017.csv", row.names = FALSE)
-write.csv(city_complete_weighted, "data/2017/mode_combination_city_to_city_weighted_2017.csv", row.names = FALSE)
-write.csv(suburb_complete, "data/2017/mode_combination_suburb_to_suburb_2017.csv", row.names = FALSE)
-write.csv(suburb_complete_weighted, "data/2017/mode_combination_suburb_to_suburb_weighted_2017.csv", row.names = FALSE)
-
-# Print summary
-cat("=== CITY TO CITY SUMMARY (2017) ===\n")
-cat("Unweighted total multimodal trips:", sum(city_complete$n), "\n")
-cat("Weighted total multimodal trips:", sum(city_complete_weighted$weighted_n), "\n")
-cat("Average expansion factor:", round(sum(city_complete_weighted$weighted_n) / sum(city_complete$n), 2), "\n\n")
-
-cat("=== SUBURB TO SUBURB SUMMARY (2017) ===\n")
-cat("Unweighted total multimodal trips:", sum(suburb_complete$n), "\n")
-cat("Weighted total multimodal trips:", sum(suburb_complete_weighted$weighted_n), "\n")
-cat("Average expansion factor:", round(sum(suburb_complete_weighted$weighted_n) / sum(suburb_complete$n), 2), "\n")
+suburb_complete<- suburb_complete %>%
+  rename(mode = P5_14_merged)
+suburb_final<-rbind(suburb_summary_one, suburb_complete) %>%
+  group_by(mode) %>%
+  summarise(n = sum(n))
+# write.csv(suburb_final, file = "data/city-city-suburb/suburb_mode_summary_2017.csv", row.names = FALSE)
