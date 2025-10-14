@@ -35,12 +35,12 @@ complete_trip_2007 <- trip_2007 %>%
 # City to city trips (origin 9 and destination 9)
 city_to_city <- complete_trip_2007 %>%
   filter(origin_ent == "09" & dest_ent == "09") %>%
-  select(SORDENTRAN, NFACTOR)
+  select(SORDENTRAN)
 
 # Suburb to suburb trips (origin 15 or 13 and destination 15 or 13)
 suburb_to_suburb <- complete_trip_2007 %>%
   filter(origin_ent %in% c("13", "15") & dest_ent %in% c("13", "15")) %>%
-  select(SORDENTRAN, NFACTOR)
+  select(SORDENTRAN)
 
 # Helper function for deduplication
 dedup_key <- function(v) {
@@ -119,6 +119,106 @@ classify_trips <- function(df) {
 }
 
 
+# Process city to city trips
 city_results <- classify_trips(city_to_city)
 
+# Create a merged mode key for city trips
+city_results <- city_results %>%
+  rowwise() %>%
+  mutate(
+    mode_key = paste(sort(unique_modes), collapse = "_")
+  ) %>%
+  ungroup()
+
+# Aggregate city trips by mode combination
+city_mode_summary <- city_results %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+
+# Single mode city trips
+city_single_mode <- city_results %>%
+  filter(lengths(unique_modes) == 1) %>%
+  rowwise() %>%
+  mutate(mode = unique_modes[1]) %>%
+  ungroup()
+
+city_single_mode_summary <- city_single_mode %>%
+  group_by(mode) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+
+# Multimodal city trips (2 or more modes)
+city_multimodal <- city_results %>%
+  filter(lengths(unique_modes) >= 2)
+
+city_multimodal_summary <- city_multimodal %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+
+# Process suburb to suburb trips
 suburb_results <- classify_trips(suburb_to_suburb)
+
+# Create a merged mode key for suburb trips
+suburb_results <- suburb_results %>%
+  rowwise() %>%
+  mutate(
+    mode_key = paste(sort(unique_modes), collapse = "_")
+  ) %>%
+  ungroup()
+
+# Aggregate suburb trips by mode combination
+suburb_mode_summary <- suburb_results %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+
+# Single mode suburb trips
+suburb_single_mode <- suburb_results %>%
+  filter(lengths(unique_modes) == 1) %>%
+  rowwise() %>%
+  mutate(mode = unique_modes[1]) %>%
+  ungroup()
+
+suburb_single_mode_summary <- suburb_single_mode %>%
+  group_by(mode) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+# Multimodal suburb trips (2 or more modes)
+suburb_multimodal <- suburb_results %>%
+  filter(lengths(unique_modes) >= 2)
+
+suburb_multimodal_summary <- suburb_multimodal %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+sum(city_mode_summary$count)  # Total city to city trips
+sum(suburb_mode_summary$count)  # Total suburb to suburb trips
+
+# write.csv(city_mode_summary, "data/city-city-suburb/2007_city_to_city_mode_summary.csv", row.names = FALSE)
+# write.csv(suburb_mode_summary, "data/city-city-suburb/2007_suburb_to_suburb_mode_summary.csv", row.names = FALSE)
