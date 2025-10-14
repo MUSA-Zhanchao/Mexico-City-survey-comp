@@ -331,7 +331,7 @@ city_mode6_combined <- city_six_mode_combined %>%
   summarise(n = n(), .groups = 'drop')
 
 # Combine all city multimodal trips
-city_complete <- rbind(city_mode2_combined, city_mode3_combined, city_mode4_combined, 
+city_complete <- rbind(city_mode2_combined, city_mode3_combined, city_mode4_combined,
                        city_mode5_combined, city_mode6_combined)
 city_complete <- city_complete %>%
   group_by(P5_14_merged) %>%
@@ -358,7 +358,7 @@ city_mode6_weighted <- city_six_mode_combined %>%
   group_by(P5_14_merged) %>%
   summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
-city_complete_weighted <- rbind(city_mode2_weighted, city_mode3_weighted, city_mode4_weighted, 
+city_complete_weighted <- rbind(city_mode2_weighted, city_mode3_weighted, city_mode4_weighted,
                                 city_mode5_weighted, city_mode6_weighted)
 city_complete_weighted <- city_complete_weighted %>%
   group_by(P5_14_merged) %>%
@@ -665,7 +665,7 @@ suburb_mode6_combined <- suburb_six_mode_combined %>%
   summarise(n = n(), .groups = 'drop')
 
 # Combine all suburb multimodal trips
-suburb_complete <- rbind(suburb_mode2_combined, suburb_mode3_combined, suburb_mode4_combined, 
+suburb_complete <- rbind(suburb_mode2_combined, suburb_mode3_combined, suburb_mode4_combined,
                          suburb_mode5_combined, suburb_mode6_combined)
 suburb_complete <- suburb_complete %>%
   group_by(P5_14_merged) %>%
@@ -692,7 +692,7 @@ suburb_mode6_weighted <- suburb_six_mode_combined %>%
   group_by(P5_14_merged) %>%
   summarise(weighted_n = sum(FACTOR), .groups = 'drop')
 
-suburb_complete_weighted <- rbind(suburb_mode2_weighted, suburb_mode3_weighted, suburb_mode4_weighted, 
+suburb_complete_weighted <- rbind(suburb_mode2_weighted, suburb_mode3_weighted, suburb_mode4_weighted,
                                   suburb_mode5_weighted, suburb_mode6_weighted)
 suburb_complete_weighted <- suburb_complete_weighted %>%
   group_by(P5_14_merged) %>%
