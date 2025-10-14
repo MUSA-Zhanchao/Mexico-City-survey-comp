@@ -119,6 +119,178 @@ classify_trips <- function(df) {
 }
 
 
+# Process city to city trips
 city_results <- classify_trips(city_to_city)
 
+# Create a merged mode key for city trips
+city_results <- city_results %>%
+  rowwise() %>%
+  mutate(
+    mode_key = paste(sort(unique_modes), collapse = "_")
+  ) %>%
+  ungroup()
+
+# Aggregate city trips by mode combination
+city_mode_summary <- city_results %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+# Weighted city trips
+city_mode_summary_weighted <- city_results %>%
+  group_by(mode_key) %>%
+  summarise(
+    weighted_count = sum(NFACTOR),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(weighted_count))
+
+# Single mode city trips
+city_single_mode <- city_results %>%
+  filter(lengths(unique_modes) == 1) %>%
+  rowwise() %>%
+  mutate(mode = unique_modes[1]) %>%
+  ungroup()
+
+city_single_mode_summary <- city_single_mode %>%
+  group_by(mode) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+city_single_mode_weighted <- city_single_mode %>%
+  group_by(mode) %>%
+  summarise(
+    weighted_count = sum(NFACTOR),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(weighted_count))
+
+# Multimodal city trips (2 or more modes)
+city_multimodal <- city_results %>%
+  filter(lengths(unique_modes) >= 2)
+
+city_multimodal_summary <- city_multimodal %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+city_multimodal_weighted <- city_multimodal %>%
+  group_by(mode_key) %>%
+  summarise(
+    weighted_count = sum(NFACTOR),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(weighted_count))
+
+# Process suburb to suburb trips
 suburb_results <- classify_trips(suburb_to_suburb)
+
+# Create a merged mode key for suburb trips
+suburb_results <- suburb_results %>%
+  rowwise() %>%
+  mutate(
+    mode_key = paste(sort(unique_modes), collapse = "_")
+  ) %>%
+  ungroup()
+
+# Aggregate suburb trips by mode combination
+suburb_mode_summary <- suburb_results %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+# Weighted suburb trips
+suburb_mode_summary_weighted <- suburb_results %>%
+  group_by(mode_key) %>%
+  summarise(
+    weighted_count = sum(NFACTOR),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(weighted_count))
+
+# Single mode suburb trips
+suburb_single_mode <- suburb_results %>%
+  filter(lengths(unique_modes) == 1) %>%
+  rowwise() %>%
+  mutate(mode = unique_modes[1]) %>%
+  ungroup()
+
+suburb_single_mode_summary <- suburb_single_mode %>%
+  group_by(mode) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+suburb_single_mode_weighted <- suburb_single_mode %>%
+  group_by(mode) %>%
+  summarise(
+    weighted_count = sum(NFACTOR),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(weighted_count))
+
+# Multimodal suburb trips (2 or more modes)
+suburb_multimodal <- suburb_results %>%
+  filter(lengths(unique_modes) >= 2)
+
+suburb_multimodal_summary <- suburb_multimodal %>%
+  group_by(mode_key) %>%
+  summarise(
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(count))
+
+suburb_multimodal_weighted <- suburb_multimodal %>%
+  group_by(mode_key) %>%
+  summarise(
+    weighted_count = sum(NFACTOR),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(weighted_count))
+
+# Save results
+write.csv(city_mode_summary, "data/2007/mode_combination_city_to_city_2007.csv", row.names = FALSE)
+write.csv(city_mode_summary_weighted, "data/2007/mode_combination_city_to_city_weighted_2007.csv", row.names = FALSE)
+write.csv(city_single_mode_summary, "data/2007/single_mode_city_to_city_2007.csv", row.names = FALSE)
+write.csv(city_single_mode_weighted, "data/2007/single_mode_city_to_city_weighted_2007.csv", row.names = FALSE)
+write.csv(city_multimodal_summary, "data/2007/multimodal_city_to_city_2007.csv", row.names = FALSE)
+write.csv(city_multimodal_weighted, "data/2007/multimodal_city_to_city_weighted_2007.csv", row.names = FALSE)
+
+write.csv(suburb_mode_summary, "data/2007/mode_combination_suburb_to_suburb_2007.csv", row.names = FALSE)
+write.csv(suburb_mode_summary_weighted, "data/2007/mode_combination_suburb_to_suburb_weighted_2007.csv", row.names = FALSE)
+write.csv(suburb_single_mode_summary, "data/2007/single_mode_suburb_to_suburb_2007.csv", row.names = FALSE)
+write.csv(suburb_single_mode_weighted, "data/2007/single_mode_suburb_to_suburb_weighted_2007.csv", row.names = FALSE)
+write.csv(suburb_multimodal_summary, "data/2007/multimodal_suburb_to_suburb_2007.csv", row.names = FALSE)
+write.csv(suburb_multimodal_weighted, "data/2007/multimodal_suburb_to_suburb_weighted_2007.csv", row.names = FALSE)
+
+# Print summary
+cat("=== CITY TO CITY SUMMARY (2007) ===\n")
+cat("Total trips:", nrow(city_results), "\n")
+cat("Single mode trips:", nrow(city_single_mode), "\n")
+cat("Multimodal trips:", nrow(city_multimodal), "\n")
+cat("Unweighted total trips:", sum(city_mode_summary$count), "\n")
+cat("Weighted total trips:", sum(city_mode_summary_weighted$weighted_count), "\n")
+cat("Average expansion factor:", round(sum(city_mode_summary_weighted$weighted_count) / sum(city_mode_summary$count), 2), "\n\n")
+
+cat("=== SUBURB TO SUBURB SUMMARY (2007) ===\n")
+cat("Total trips:", nrow(suburb_results), "\n")
+cat("Single mode trips:", nrow(suburb_single_mode), "\n")
+cat("Multimodal trips:", nrow(suburb_multimodal), "\n")
+cat("Unweighted total trips:", sum(suburb_mode_summary$count), "\n")
+cat("Weighted total trips:", sum(suburb_mode_summary_weighted$weighted_count), "\n")
+cat("Average expansion factor:", round(sum(suburb_mode_summary_weighted$weighted_count) / sum(suburb_mode_summary$count), 2), "\n")
