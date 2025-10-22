@@ -42,10 +42,29 @@ suburb_to_suburb <- complete_trip_2007 %>%
   filter(origin_ent %in% c("13", "15") & dest_ent %in% c("13", "15")) %>%
   select(SORDENTRAN)
 
-# Helper function for deduplication
 dedup_key <- function(v) {
-  paste(sort(unique(na.omit(v))), collapse = "_")
+  paste(sort(unique(na.omit(v))), collapse = "_")  # unique & order-insensitive
 }
+
+
+city_to_city2007_single<- city_to_city %>%
+  separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6) %>%
+  mutate(across(starts_with("trip"), ~ na_if(., "0")))%>%
+  filter(is.na(trip2))%>%
+  group_by(trip1)%>%
+  summarise(
+    count = n()
+  )
+suburb_to_suburb2007_single<- suburb_to_suburb %>%
+  separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6) %>%
+  mutate(across(starts_with("trip"), ~ na_if(., "0")))%>%
+  filter(is.na(trip2))%>%
+  group_by(trip1)%>%
+  summarise(
+    count = n()
+  )
+
+
 
 # Function to classify trips into mode categories
 classify_trips <- function(df) {
