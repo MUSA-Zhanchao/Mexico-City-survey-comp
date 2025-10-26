@@ -64,7 +64,8 @@ suburb_to_suburb2007_single<- suburb_to_suburb %>%
     count = n()
   )
 
-
+# write.csv(city_to_city2007_single, "data/city-city-suburb/2007_city_to_city_single_mode_summary.csv", row.names = FALSE)
+write.csv(suburb_to_suburb2007_single, "data/city-city-suburb/2007_suburb_to_suburb_single_mode_summary.csv", row.names = FALSE)
 
 # Function to classify trips into mode categories
 classify_trips <- function(df) {
