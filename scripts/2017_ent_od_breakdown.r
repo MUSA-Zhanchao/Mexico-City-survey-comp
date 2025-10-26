@@ -660,6 +660,3 @@ suburb_final<-rbind(suburb_summary_one, suburb_complete) %>%
   group_by(mode) %>%
   summarise(n = sum(n))
 # write.csv(suburb_final, file = "data/city-city-suburb/suburb_mode_summary_2017.csv", row.names = FALSE)
-
-
-

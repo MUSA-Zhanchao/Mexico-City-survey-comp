@@ -54,5 +54,4 @@ ggplot()+
 city_to_city2017_multi<-city_to_city2017 %>%
   filter(str_detect(mode, "_"))
 city_to_city2007_multi<-city_to_city2007 %>%
-  filter(str_detect(mode_key, "_"))    
-
+  filter(str_detect(mode_key, "_"))
