@@ -47,27 +47,28 @@ dedup_key <- function(v) {
 }
 
 
-city_to_city2007_single<- city_to_city %>%
-  separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6) %>%
-  mutate(across(starts_with("trip"), ~ na_if(., "0")))%>%
-  filter(is.na(trip2))%>%
-  group_by(trip1)%>%
-  summarise(
-    weighted_count = sum(NFACTOR)
-  )
-suburb_to_suburb2007_single<- suburb_to_suburb %>%
-  separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6) %>%
-  mutate(across(starts_with("trip"), ~ na_if(., "0")))%>%
-  filter(is.na(trip2))%>%
-  group_by(trip1)%>%
-  summarise(
-    weighted_count = sum(NFACTOR)
-  )
+# city_to_city2007_single<- city_to_city %>%
+#   separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6) %>%
+#   mutate(across(starts_with("trip"), ~ na_if(., "0")))%>%
+#   filter(is.na(trip2))%>%
+#   group_by(trip1)%>%
+#   summarise(
+#     weighted_count = sum(NFACTOR)
+#   )
+# suburb_to_suburb2007_single<- suburb_to_suburb %>%
+#   separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6) %>%
+#   mutate(across(starts_with("trip"), ~ na_if(., "0")))%>%
+#   filter(is.na(trip2))%>%
+#   group_by(trip1)%>%
+#   summarise(
+#     weighted_count = sum(NFACTOR)
+#   )
 
 # write.csv(city_to_city2007_single, "data/city-city-suburb/2007_city_to_city_single_mode_summary.csv", row.names = FALSE)
-write.csv(suburb_to_suburb2007_single, "data/city-city-suburb/2007_suburb_to_suburb_single_mode_summary.csv", row.names = FALSE)
-
+# write.csv(suburb_to_suburb2007_single, "data/city-city-suburb/2007_suburb_to_suburb_single_mode_summary_weighted.csv", row.names = FALSE)
+# write.csv(city_to_city2007_single, "data/city-city-suburb/2007_city_to_city_single_mode_summary_weighted.csv", row.names = FALSE)
 # Function to classify trips into mode categories
+
 classify_trips <- function(df) {
   # Parse SORDENTRAN into individual trip segments
   df_parsed <- df %>%
@@ -240,5 +241,5 @@ suburb_multimodal_summary <- suburb_multimodal %>%
 sum(city_mode_summary$weighted_count)  # Total city to city trips (weighted)
 sum(suburb_mode_summary$weighted_count)  # Total suburb to suburb trips (weighted)
 
-# write.csv(city_mode_summary, "data/city-city-suburb/2007_city_to_city_mode_summary.csv", row.names = FALSE)
-# write.csv(suburb_mode_summary, "data/city-city-suburb/2007_suburb_to_suburb_mode_summary.csv", row.names = FALSE)
+# write.csv(city_mode_summary, "data/city-city-suburb/2007_city_to_city_mode_summary_weighted.csv", row.names = FALSE)
+# write.csv(suburb_mode_summary, "data/city-city-suburb/2007_suburb_to_suburb_mode_summary_weighted.csv", row.names = FALSE)

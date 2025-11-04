@@ -1,0 +1,17 @@
+mode_key,weighted_count
+Other,4268865
+Bus,3757659
+Bus_Metro,1571743
+Metro,674526
+Bus_Other,103048
+BRT_Bus,75274
+Metro_Other,64301
+Bus_Metro_Other,61216
+BRT,40027
+BRT_Bus_Metro,18100
+BRT_Metro,15085
+BRT_Other,4996
+BRT_Bus_Other,2168
+BRT_Metro_Other,533
+BRT_Bus_Metro_Other,340
+sum,10657881
