@@ -17,7 +17,7 @@ hogar_07 <- hogar %>%
 vivi_hogar <- left_join(vivi, hogar_07, by = c("ID_VIV" = "IDTR_VIVIE"))
 
 resident_07 <- residents %>%
-  select(IDTR_RESID, IDTR_HOGAR,CENTIDADOR)
+  select(IDTR_RESID, IDTR_HOGAR, CENTIDADOR)
 
 vivi_hogar_resident <- left_join(vivi_hogar, resident_07, by = c("IDTR_HOGAR" = "IDTR_HOGAR"))
 
