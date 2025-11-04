@@ -74,54 +74,12 @@ summary_tbl_city_1 <- summary_tbl_city_1 %>%
   summarise(weighted_n=sum(weighted_n))%>%
   arrange(desc(weighted_n))%>%
   mutate(percentage = weighted_n / n_city_1 * 100)
+summary_tbl_city_1<- summary_tbl_city_1 %>%
+  select(mode, weighted_n)
 
-city_to_city_2<-  city_to_city%>%
-  filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
-# get rid of walking
-city_to_city2<- city_to_city_2 %>%
-  mutate(P5_14_14 = ifelse(is.na(P5_14_14), NA, NA))
-city_to_city_mode1_plus<- city_to_city2%>%
-  filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 1)
-summary_tbl_one_mode_plus <- city_to_city_mode1_plus %>%
-  summarise(across(starts_with("P5_14_"), ~ sum(FACTOR[!is.na(.)]))) %>%
-  pivot_longer(everything(), names_to = "column", values_to = "weighted_n") %>%
-  arrange(desc(weighted_n))
-summary_tbl_one_mode_plus <- summary_tbl_one_mode_plus %>%
-  mutate(mode = case_when(
-    column == "P5_14_01" ~ "Drive",
-    column == "P5_14_02" ~ "Bus",
-    column == "P5_14_03" ~ "Taxi",
-    column == "P5_14_04" ~ "Taxi",
-    column == "P5_14_05" ~ "Metro",
-    column == "P5_14_06" ~ "Bus",
-    column == "P5_14_07" ~ "Bicycle",
-    column == "P5_14_08" ~ "Bus",
-    column == "P5_14_09" ~ "Moto",
-    column == "P5_14_10" ~ "Bus",
-    column == "P5_14_11" ~ "BRT",
-    column == "P5_14_12" ~ "Metro",
-    column == "P5_14_13" ~ "Metro",
-    column == "P5_14_14" ~ "Walk",
-    column == "P5_14_15" ~ "Metro",
-    column == "P5_14_16" ~ "Taxi",
-    column == "P5_14_17" ~ "Taxi",
-    column == "P5_14_18" ~ "Bus",
-    column == "P5_14_19" ~ "Other",
-    column == "P5_14_20" ~ "Other",
-    TRUE ~ "Unknown"
-  ))%>%
-  group_by(mode)%>%
-  summarise(weighted_n=sum(weighted_n))%>%
-  arrange(desc(weighted_n))%>%
-  mutate(percentage = weighted_n / n_city_1 * 100)
-summary_one<-rbind(summary_tbl_city_1, summary_tbl_one_mode_plus)%>%
-  group_by(mode) %>%
-  summarise(weighted_n = sum(weighted_n))%>%
-  arrange(desc(weighted_n))
-# write.csv(summary_one, "data/city-city-suburb/2017_city_to_city_single_mode_summary_weighted.csv", row.names = FALSE)
 # Process multimodal trips for city_to_city
 # actual two mode processing
-city_two_mode <- city_to_city2 %>%
+city_two_mode <- city_to_city %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
 
 city_two_mode <- city_two_mode %>%
@@ -340,10 +298,12 @@ city_complete <- city_complete %>%
 city_complete<- city_complete %>%
   rename(mode=P5_14_merged)
 # Final city summary
-city_final <- rbind(summary_one, city_complete) %>%
-  group_by(mode) %>%
-  summarise(weighted_n = sum(weighted_n))
-
+city_final <- rbind(summary_tbl_city_1, city_complete)%>%
+  group_by(mode)%>%
+  summarise(weighted_n=sum(weighted_n))%>%
+  arrange(desc(weighted_n))
+sum(city_final$weighted_n)
+sum
 # write.csv(city_final, "data/city-city-suburb/2017_city_to_city_mode_breakdown_weighted.csv", row.names = FALSE)
 
 # === SUBURB TO SUBURB ANALYSIS ===
@@ -431,11 +391,7 @@ summary_tbl_suburb_one_mode_plus <- summary_tbl_suburb_one_mode_plus %>%
   arrange(desc(weighted_n)) %>%
   mutate(percentage = weighted_n / n_suburb_1 * 100)
 
-suburb_summary_one <- rbind(summary_tbl_suburb_1, summary_tbl_suburb_one_mode_plus) %>%
-  group_by(mode) %>%
-  summarise(weighted_n = sum(weighted_n)) %>%
-  arrange(desc(weighted_n))
-# write.csv(suburb_summary_one, "data/city-city-suburb/2017_suburb_to_suburb_single_mode_summary_weighted.csv", row.names = FALSE)
+
 # Process multimodal trips for suburb_to_suburb
 suburb_two_mode <- suburb_to_suburb2 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
