@@ -118,7 +118,7 @@ summary_one<-rbind(summary_tbl_city_1, summary_tbl_one_mode_plus)%>%
   group_by(mode) %>%
   summarise(weighted_n = sum(weighted_n))%>%
   arrange(desc(weighted_n))
-
+# write.csv(summary_one, "data/city-city-suburb/2017_city_to_city_single_mode_summary_weighted.csv", row.names = FALSE)
 # Process multimodal trips for city_to_city
 # actual two mode processing
 city_two_mode <- city_to_city2 %>%
@@ -344,7 +344,7 @@ city_final <- rbind(summary_one, city_complete) %>%
   group_by(mode) %>%
   summarise(weighted_n = sum(weighted_n))
 
-# write.csv(city_final, "data/city-city-suburb/2017_city_to_city_mode_breakdown.csv", row.names = FALSE)
+# write.csv(city_final, "data/city-city-suburb/2017_city_to_city_mode_breakdown_weighted.csv", row.names = FALSE)
 
 # === SUBURB TO SUBURB ANALYSIS ===
 
@@ -435,7 +435,7 @@ suburb_summary_one <- rbind(summary_tbl_suburb_1, summary_tbl_suburb_one_mode_pl
   group_by(mode) %>%
   summarise(weighted_n = sum(weighted_n)) %>%
   arrange(desc(weighted_n))
-
+# write.csv(suburb_summary_one, "data/city-city-suburb/2017_suburb_to_suburb_single_mode_summary_weighted.csv", row.names = FALSE)
 # Process multimodal trips for suburb_to_suburb
 suburb_two_mode <- suburb_to_suburb2 %>%
   filter(rowSums(!is.na(select(., starts_with("P5_14")))) == 2)
@@ -659,4 +659,4 @@ suburb_complete<- suburb_complete %>%
 suburb_final<-rbind(suburb_summary_one, suburb_complete) %>%
   group_by(mode) %>%
   summarise(weighted_n = sum(weighted_n))
-# write.csv(suburb_final, file = "data/city-city-suburb/suburb_mode_summary_2017.csv", row.names = FALSE)
+# write.csv(suburb_final, file = "data/city-city-suburb/suburb_mode_summary_2017_weighted.csv", row.names = FALSE)
