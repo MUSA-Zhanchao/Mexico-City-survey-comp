@@ -13,7 +13,7 @@ trip_2017 <- trip_2017 %>%
 trip_2017 <- trip_2017 %>%
   filter(P5_3 == 1)
 
-# City to city trips (origin 9 and destination 9)
+# City to suburb trips (origin 9 and destination 13 or 15)
 city_to_suburb <- trip_2017 %>%
   filter(origin_ent == "9" & dest_ent %in% c("13", "15")) %>%
   select(starts_with("P5_14"), FACTOR)
