@@ -22,7 +22,7 @@ city_to_suburb <- trip_2017 %>%
 suburb_to_city <- trip_2017 %>%
   filter(origin_ent %in% c("13", "15") & dest_ent == "9") %>%
   select(starts_with("P5_14"), FACTOR)
-complete_suburb_city<-rbind(city_to_suburb, suburb_to_city)
+complete_suburb_city <- rbind(city_to_suburb, suburb_to_city)
 
 #turns all 2 to NA
 complete_suburb_city[complete_suburb_city == 2] <- NA
