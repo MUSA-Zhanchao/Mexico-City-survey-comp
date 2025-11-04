@@ -26,4 +26,3 @@ complete_suburb_city<-rbind(city_to_suburb, suburb_to_city)
 
 #turns all 2 to NA
 complete_suburb_city[complete_suburb_city == 2] <- NA
-

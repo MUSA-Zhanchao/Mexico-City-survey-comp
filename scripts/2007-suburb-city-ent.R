@@ -51,7 +51,7 @@ classify_trips <- function(df) {
   df_parsed <- df %>%
     separate(SORDENTRAN, into = paste0("trip", 1:7), sep = 1:6, remove = FALSE) %>%
     mutate(across(starts_with("trip"), ~ na_if(., "0")))
-  
+
   # Categorize each trip segment
   df_categorized <- df_parsed %>%
     mutate(
@@ -105,7 +105,7 @@ classify_trips <- function(df) {
         TRUE ~ "Other"
       )
     )
-  
+
   # Get unique modes for each trip
   df_with_modes <- df_categorized %>%
     rowwise() %>%
